@@ -1,8 +1,8 @@
 var mysql = require("mysql2");
 var connection = mysql.createConnection({
-  host: "SG-student-5242-mysql-master.servers.mongodirector.com",
-  user: "sgroot",
-  password: "wI0P.Ick137mAMvw",
+  host: "localhost",
+  user: "root",
+  password: "",
   database: "student",
 });
 
