@@ -66,13 +66,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 var cors = require("cors");
 
-// //use cors to allow cross origin resource sharing
-// app.use(
-//   cors({
-//     origin: "http://localhost:44297",
-//     credentials: true,
-//   })
-// );
+//use cors to allow cross origin resource sharing
+app.use(
+  cors({
+    origin: "http://localhost:5000",
+    credentials: true,
+  })
+);
 
 app.post("/userlogin", (req, res) => {
   params = req.body;
