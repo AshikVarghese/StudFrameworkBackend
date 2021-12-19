@@ -24,7 +24,7 @@ module.exports = function (app) {
     // console.log("uploaded");
     res.send(
       JSON.stringify(
-        "http://localhost:3000/public/Template/academic_details.xlsx#/admin/Academics"
+        "http://192.168.1.145:44297/public/Template/academic_details.xlsx#/admin/Academics"
       )
     );
   });
