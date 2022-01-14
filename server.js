@@ -558,37 +558,37 @@ app.post("/intern_delete", (req, res) => {
 
 app.post("/comp_stud_display", (req, res) => {
   params = req.body;
-  pd_internship.PdComp_Stud_display((results) => {
+  pd_competitions.PdComp_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/comp_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdComp_CA_display((results) => {
+  pd_competitions.PdComp_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/pdcomp_Stud_display", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_competitions.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/comp_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdComp_verify((results) => {
+  pd_competitions.PdComp_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/comp_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdComp_delete((results) => {
+  pd_competitions.PdComp_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/comp_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdComp_edit((results) => {
+  pd_competitions.PdComp_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -602,19 +602,19 @@ app.post("/comp_Stud_insert", (req, res) => {
 /* PD Courses */
 app.post("/cour_Stud_display", (req, res) => {
   params = req.body;
-  pd_internship.PdCour_Stud_display((results) => {
+  pd_courses.PdCour_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/cour_CA_display", (req, res) => {
   params = req.body;
-  pd_internship.PdCour_CA_display((results) => {
+  pd_courses.PdCour_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/courpd_stud_display", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_courses.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -626,19 +626,19 @@ app.post("/Cour_Stud_insert", (req, res) => {
 });
 app.post("/cour_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdCour_verify((results) => {
+  pd_courses.PdCour_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/cour_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdCour_delete((results) => {
+  pd_courses.PdCour_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/cour_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdCour_edit((results) => {
+  pd_courses.PdCour_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -646,38 +646,44 @@ app.post("/cour_edit", (req, res) => {
 /* PD final project */
 app.post("/finpro_Stud_display", (req, res) => {
   params = req.body;
-  pd_internship.PdFinal_Stud_display((results) => {
+  pd_final_project.PdFinal_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/finpro_CA_display", (req, res) => {
   params = req.body;
-  pd_internship.PdFinal_CA_display((results) => {
+  pd_final_project.PdFinal_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 
 app.post("/prodev_Stud_display", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_final_project.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/finpro_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdFinal_verify((results) => {
+  pd_final_project.PdFinal_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/finpro_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdFinal_delete((results) => {
+  pd_final_project.PdFinal_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/finpro_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdFinal_edit((results) => {
+  pd_final_project.PdFinal_edit((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+app.post("/final_stud_insert", (req, res) => {
+  params = req.body;
+  pd_final_project.PdFinal_Stud_insert((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -685,37 +691,37 @@ app.post("/finpro_edit", (req, res) => {
 /* PD guest lecture */
 app.post("/guest_stud_display", (req, res) => {
   params = req.body;
-  pd_internship.PdGuest_Stud_display((results) => {
+  pd_guest_lecture.PdGuest_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/guest_Ca_display", (req, res) => {
   params = req.body;
-  pd_internship.PdGuest_CA_display((results) => {
+  pd_guest_lecture.PdGuest_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/pdguest_stud_display", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_guest_lecture.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/guest_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdGuest_verify((results) => {
+  pd_guest_lecture.PdGuest_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/guest_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdGuest_delete((results) => {
+  pd_guest_lecture.PdGuest_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/guest_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdGuest_edit((results) => {
+  pd_guest_lecture.PdGuest_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -729,37 +735,37 @@ app.post("/guest_stud_insert", (req, res) => {
 /* PD Workshops */
 app.post("/workshop_studisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdWork_Stud_display((results) => {
+  pd_workshops.PdWork_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/workshop_cadisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdWork_CA_display((results) => {
+  pd_workshops.PdWork_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/workshop_pfstudisplay", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_workshops.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/workshop_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdWork_verify((results) => {
+  pd_workshops.PdWork_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/workshop_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdWork_delete((results) => {
+  pd_workshops.PdWork_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/workshop_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdWork_edit((results) => {
+  pd_workshops.PdWork_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -773,37 +779,37 @@ app.post("/workshop_stuinsert", (req, res) => {
 /* PD Webinars */
 app.post("/webinar_display", (req, res) => {
   params = req.body;
-  pd_internship.PdWeb_Stud_display((results) => {
+  pd_webinars.PdWeb_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/webinar_cadisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdWeb_CA_display((results) => {
+  pd_webinars.PdWeb_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/webinar_pfdisplay", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_webinars.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/webinar_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdWeb_verify((results) => {
+  pd_webinars.PdWeb_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/webinar_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdWeb_delete((results) => {
+  pd_webinars.PdWeb_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/webinar_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdWeb_edit((results) => {
+  pd_webinars.PdWeb_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -817,43 +823,43 @@ app.post("/webinar_insert", (req, res) => {
 /* PD Publications */
 app.post("/publication_display", (req, res) => {
   params = req.body;
-  pd_internship.PdPublica_Stud_display((results) => {
+  pd_publications.PdPublica_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/publication_cadisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdPublica_CA_display((results) => {
+  pd_publications.PdPublica_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/publication_pfdisplay", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_publications.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/publication_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdPublica_verify((results) => {
+  pd_publications.PdPublica_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/publication_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdPublica_delete((results) => {
+  pd_publications.PdPublica_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/publication_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdPublica_edit((results) => {
+  pd_publications.PdPublica_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/publication_insert", (req, res) => {
   params = req.body;
-  pd_internship.PdPublica_Stud_insert((results) => {
+  pd_publications.PdPublica_Stud_insert((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -861,37 +867,37 @@ app.post("/publication_insert", (req, res) => {
 /* PD Placement */
 app.post("/placement_display", (req, res) => {
   params = req.body;
-  pd_internship.PdPlace_Stud_display((results) => {
+  pd_placement.PdPlace_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/placement_cadisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdPlace_CA_display((results) => {
+  pd_placement.PdPlace_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/placement_pfdisplay", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_placement.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/placement_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdPlace_verify((results) => {
+  pd_placement.PdPlace_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/placement_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdPlace_delete((results) => {
+  pd_placement.PdPlace_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/placement_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdPlace_edit((results) => {
+  pd_placement.PdPlace_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -905,37 +911,37 @@ app.post("/placement_insert", (req, res) => {
 /* PD Motivational Talk */
 app.post("/Motivational_display", (req, res) => {
   params = req.body;
-  pd_internship.PdMotive_Stud_display((results) => {
+  pd_motivational_talk.PdMotive_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Motivational_cadisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdMotive_CA_display((results) => {
+  pd_motivational_talk.PdMotive_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Motivational_pfdisplay", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_motivational_talk.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Motivational_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdMotive_verify((results) => {
+  pd_motivational_talk.PdMotive_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Motivational_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdMotive_delete((results) => {
+  pd_motivational_talk.PdMotive_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Motivational_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdMotive_edit((results) => {
+  pd_motivational_talk.PdMotive_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -949,37 +955,37 @@ app.post("/Motivational_insert", (req, res) => {
 /* PD Miniproject */
 app.post("/Miniproj_display", (req, res) => {
   params = req.body;
-  pd_internship.PdMini_Stud_display((results) => {
+  pd_mini_project.PdMini_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Miniproj_cadisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdMini_CA_display((results) => {
+  pd_mini_project.PdMini_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Miniproj_pfdisplay", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_mini_project.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Miniproj_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdMini_verify((results) => {
+  pd_mini_project.PdMini_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Miniproj_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdMini_delete((results) => {
+  pd_mini_project.PdMini_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Miniproj_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdMini_edit((results) => {
+  pd_mini_project.PdMini_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
@@ -993,37 +999,37 @@ app.post("/Miniproj_insert", (req, res) => {
 /* PD Inplant Training */
 app.post("/Inplant_display", (req, res) => {
   params = req.body;
-  pd_internship.PdInplant_Stud_display((results) => {
+  pd_inplant_training.PdInplant_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Inplant_cadisplay", (req, res) => {
   params = req.body;
-  pd_internship.PdInplant_CA_display((results) => {
+  pd_inplant_training.PdInplant_CA_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Inplant_pfdisplay", (req, res) => {
   params = req.body;
-  pd_internship.ProfDevelop_Stud_display((results) => {
+  pd_inplant_training.ProfDevelop_Stud_display((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Inplant_verify", (req, res) => {
   params = req.body;
-  pd_internship.PdInplant_verify((results) => {
+  pd_inplant_training.PdInplant_verify((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Inplant_delete", (req, res) => {
   params = req.body;
-  pd_internship.PdInplant_delete((results) => {
+  pd_inplant_training.PdInplant_delete((results) => {
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Inplant_edit", (req, res) => {
   params = req.body;
-  pd_internship.PdInplant_edit((results) => {
+  pd_inplant_training.PdInplant_edit((results) => {
     res.send(JSON.stringify(results));
   });
 });
