@@ -58,21 +58,35 @@ const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
 
 const academic_details = require("./models/academic_details");
-
+var cors = require('cors');
 let student_details = require("./models/student_details");
 const charts = require("./models/charts");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-var cors = require("cors");
 
-//use cors to allow cross origin resource sharing
-app.use(
-  cors({
-    origin: "http://localhost:5000",
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin:"*", 
+  credentials: true}));
+app.options('*',cors());
+// var corsMiddleware = function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*'); //replace localhost with actual host
+//   res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
+//   res.header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With,accept,Authorization');
+//   res.header('Access-Control-Allow-Credentials', 'true');
+//   next();
+// }
+// app.use(corsMiddleware);
+
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
+const http = require('http').Server(app);
+
+
 
 app.post("/userlogin", (req, res) => {
   params = req.body;
@@ -98,6 +112,7 @@ app.post("/passchange", (req, res) => {
 
 app.post("/studentinsert", (req, res) => {
   params = req.body;
+  console.log(params);
   student_insert.student_insert(params, (results) => {
     if (!results) {
       console.log("error");
@@ -141,6 +156,7 @@ app.post("/GeneralOfficial", (req, res) => {
 app.post("/Academic", (req, res) => {
   params = req.body;
   academic_details.fetch_academic_details_classadvisor(params, (results) => {
+    console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1089,9 +1105,14 @@ app.post("/InternshipGraphCA", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () =>
-  console.log(`Server running in port "${PORT}"`)
-);
+const PORT = process.env.PORT || 8080;
+// const server = app.listen(PORT,() =>
+//   console.log(`Server running in port :"${PORT}"`)
+// );
+// http://192.168.1.145:80
+http.listen(PORT,()=>{
+  console.log(`Server running in port :"${PORT}"`)
+});
+
 
 require("./models/bulkupload.js")(app);
