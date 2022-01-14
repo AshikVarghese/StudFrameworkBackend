@@ -98,10 +98,10 @@ function PdFinal_Stud_insert(callback) {
     "INSERT INTO pd_final_project(roll_no,title,objective,outcome,verified) VALUES(?,?,?,?,?)",
     [
       params.StudentDetails,
-      params.title,
-      params.objective,
-      params.outcome,
-      params.verified,
+      params.Title,
+      params.Objective,
+      params.Outcome,
+      params.status,
     ],
     (err, results, fields) => {
       if (err) {
@@ -113,6 +113,7 @@ function PdFinal_Stud_insert(callback) {
     }
   );
 }
+
 module.exports = {
   PdFinal_Stud_display: PdFinal_Stud_display,
   PdFinal_CA_display: PdFinal_CA_display,
