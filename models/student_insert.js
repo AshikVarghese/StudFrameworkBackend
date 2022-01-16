@@ -1,4 +1,5 @@
 const connection = require("../config/dbconfig");
+const hashconfig = require("../config/hashconfig");
 
 function student_insert(params, callback) {
   let params_lst = [
@@ -112,6 +113,29 @@ function student_insert(params, callback) {
   );
 }
 
+function student_login_insert(params, callback) {
+  let values = [
+    params.offemail,
+    hashconfig.generate_password_hashed("licet123"),
+    hashconfig.generate_auth_key(),
+    params.department,
+    params.batch,
+  ];
+  connection.query(
+    "INSERT into login_details set roll_no = ?,password=?,auth_token=?,roll_no=?,dept=?,batch=?,user_type=0",
+    values,
+    (err, results, fields) => {
+      if (err) {
+        console.log("Error");
+        //console.log(params_lst.length);
+        throw err;
+      } else {
+        console.log("Inserted Login");
+      }
+    }
+  );
+}
+
 function student_insert_roll(params, callback) {
   connection.query(
     "UPDATE login_details set roll_no=? WHERE(email = ?)",
@@ -130,4 +154,5 @@ function student_insert_roll(params, callback) {
 module.exports = {
   student_insert: student_insert,
   student_insert_roll: student_insert_roll,
+  student_login_insert: student_login_insert,
 };

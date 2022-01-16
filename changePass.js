@@ -1,4 +1,4 @@
-var crypto = require("crypto");
+import { generate_password_hashed } from "./config/hashconfig";
 const connection = require("../config/dbconfig");
 
 function change_pass(params, callback) {
@@ -11,14 +11,8 @@ function change_pass(params, callback) {
         return callback("pass-fail");
       } else {
         if (params.auth_token == details[0].auth_token) {
-          var old_pass = crypto
-            .createHash("sha256")
-            .update(params.old_pass)
-            .digest("hex");
-          var new_pass = crypto
-            .createHash("sha256")
-            .update(params.new_pass)
-            .digest("hex");
+          var old_pass = generate_password_hashed(params.old_pass);
+          var new_pass = generate_password_hashed(params.new_pass);
           console.log(old_pass === details[0].password);
           if (old_pass === details[0].password) {
             connection.query(
