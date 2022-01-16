@@ -122,9 +122,9 @@ app.post("/studentinsert", (req, res) => {
   });
 });
 
-app.post("/insertroll", (req, res) => {
+app.post("/logininsert", (req, res) => {
   params = req.body;
-  student_insert_roll.student_insert_roll(params, (results) => {
+  student_insert_roll.student_login_insert(params, (results) => {
     if (!results) {
       console.log("error");
     } else {
