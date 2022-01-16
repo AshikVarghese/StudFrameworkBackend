@@ -101,12 +101,12 @@ function PdPublica_Stud_insert(callback) {
     "INSERT INTO pd_publications(roll_no,conf_or_journal,name,title,impact_factor,indexed_in,verified) VALUES(?,?,?,?,?,?,?)",
     [
       params.StudentDetails,
-      params.conf_or_journal,
-      params.name,
-      params.title,
-      params.impact_factor,
-      params.indexed_in,
-      params.verified,
+      params.Conference,
+      params.Name,
+      params.Title,
+      params.Impact,
+      params.Index,
+      params.status,
     ],
     (err, results, fields) => {
       if (err) {
