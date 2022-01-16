@@ -58,17 +58,19 @@ const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
 
 const academic_details = require("./models/academic_details");
-var cors = require('cors');
+var cors = require("cors");
 let student_details = require("./models/student_details");
 const charts = require("./models/charts");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
-app.use(cors({
-  origin:"*", 
-  credentials: true}));
-app.options('*',cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
+app.options("*", cors());
 // var corsMiddleware = function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin', '*'); //replace localhost with actual host
 //   res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, PATCH, POST, DELETE');
@@ -78,15 +80,13 @@ app.options('*',cors());
 // }
 // app.use(corsMiddleware);
 
-app.all('/*', function(req, res, next) {
+app.all("/*", function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
 
-const http = require('http').Server(app);
-
-
+const http = require("http").Server(app);
 
 app.post("/userlogin", (req, res) => {
   params = req.body;
@@ -1111,14 +1111,18 @@ app.post("/InternshipGraphCA", (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 8080;
+// Deployment
+// const PORT = process.env.PORT || 8080;
+
+// Dev
+const PORT = process.env.PORT || 5000;
+
 // const server = app.listen(PORT,() =>
 //   console.log(`Server running in port :"${PORT}"`)
 // );
 // http://192.168.1.145:80
-http.listen(PORT,()=>{
-  console.log(`Server running in port :"${PORT}"`)
+http.listen(PORT, () => {
+  console.log(`Server running in port :"${PORT}"`);
 });
-
 
 require("./models/bulkupload.js")(app);
