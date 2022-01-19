@@ -57,6 +57,8 @@ const pd_publications = require("./models/pd_publications");
 const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
 
+const temp = require("./models/temp");
+
 const academic_details = require("./models/academic_details");
 var cors = require("cors");
 let student_details = require("./models/student_details");
@@ -87,6 +89,17 @@ app.all("/*", function (req, res, next) {
 });
 
 const http = require("http").Server(app);
+
+app.post("/temp", (req, res) => {
+  params = req.body;
+  temp.ec(params, (results) => {
+    if (!results) {
+      console.log("error");
+    } else {
+      res.send(results);
+    }
+  });
+});
 
 app.post("/userlogin", (req, res) => {
   params = req.body;

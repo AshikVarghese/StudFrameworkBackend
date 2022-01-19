@@ -33,6 +33,7 @@
     "multer": "^1.4.3",
     "mysql2": "^2.3.2",
     "read-excel-file": "^5.2.20",
+    "store": "^2.0.12",
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
