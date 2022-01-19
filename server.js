@@ -355,7 +355,6 @@ app.post("/ExtraCulturalStudentDisplay", (req, res) => {
   params = req.body;
   fetch_ec_culturals_activity_student.fetch_ec_culturals_activity_student(
     (results) => {
-      // console.log(results);
       res.send(JSON.stringify(results));
     }
   );
@@ -363,10 +362,7 @@ app.post("/ExtraCulturalStudentDisplay", (req, res) => {
 
 app.post("/ExtraCulturalCADisplay", (req, res) => {
   params = req.body;
-  // console.log("KKKK");
-  console.log(params);
   fetch_ec_culturals_activity.fetch_ec_culturals_activity((results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -995,6 +991,7 @@ app.post("/Miniproj_insert", (req, res) => {
     res.send(JSON.stringify(results));
   });
 });
+
 /* --------------------------------------------------------- */
 /* PD Inplant Training */
 app.post("/Inplant_display", (req, res) => {
@@ -1088,7 +1085,6 @@ app.post("/Industrialv_insert", (req, res) => {
 app.post("/ProfessionalDevelopmentCA", (req, res) => {
   params = req.body;
   student_details.fetch_students_details_pd(params, (results) => {
-    console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1097,11 +1093,9 @@ app.post("/ProfessionalDevelopmentCA", (req, res) => {
 app.post("/InternshipGraphCA", (req, res) => {
   params = req.body;
   charts.GenerateInternshipCharts(params, (results) => {
-    // console.log(results);
     let placement_lst = results.map((item) => {
       return item.intern_count;
     });
-    // console.log(placement_lst);
     let batches = results.map((item) => {
       return item.batch;
     });
@@ -1121,6 +1115,7 @@ const PORT = process.env.PORT || 5000;
 //   console.log(`Server running in port :"${PORT}"`)
 // );
 // http://192.168.1.145:80
+
 http.listen(PORT, () => {
   console.log(`Server running in port :"${PORT}"`);
 });
