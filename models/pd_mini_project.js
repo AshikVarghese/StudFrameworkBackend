@@ -4,7 +4,7 @@ const connection = require("../config/dbconfig");
 
 function PdMini_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_mini_project` inner join student_details on pd_mini_project.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_mini_project` inner join student_details on pd_mini_project.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {

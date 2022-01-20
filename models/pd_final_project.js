@@ -1,8 +1,10 @@
+/** @format */
+
 const connection = require("../config/dbconfig");
 
 function PdFinal_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_final_project` inner join student_details on pd_final_project.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_final_project` inner join student_details on pd_final_project.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {
