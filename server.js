@@ -571,7 +571,7 @@ app.post("/comp_stud_display", (req, res) => {
     res.send(JSON.stringify(results));
   });
 });
-app.post("/comp_delete", (req, res) => {
+app.post("/comp_ca_display", (req, res) => {
   params = req.body;
   pd_competitions.PdComp_CA_display((results) => {
     res.send(JSON.stringify(results));
