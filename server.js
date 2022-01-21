@@ -56,7 +56,9 @@ const pd_placement = require("./models/pd_placement");
 const pd_publications = require("./models/pd_publications");
 const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
+
 const temp = require("./models/temp");
+
 const academic_details = require("./models/academic_details");
 var cors = require("cors");
 let student_details = require("./models/student_details");
@@ -88,18 +90,16 @@ app.all("/*", function (req, res, next) {
 
 const http = require("http").Server(app);
 
-app.post("/temp",(req,res)=>{
+app.post("/temp", (req, res) => {
   params = req.body;
-  temp.ec(params,(results)=>{
-    if(!results){
-      console.log("error")
+  temp.ec(params, (results) => {
+    if (!results) {
+      console.log("error");
+    } else {
+      res.send(results);
     }
-    else{
-        res.send(results)
-    }
-  })
-})
-
+  });
+});
 
 app.post("/userlogin", (req, res) => {
   params = req.body;
@@ -135,9 +135,9 @@ app.post("/studentinsert", (req, res) => {
   });
 });
 
-app.post("/logininsert", (req, res) => {
+app.post("/insertroll", (req, res) => {
   params = req.body;
-  student_insert_roll.student_login_insert(params, (results) => {
+  student_insert_roll.student_insert_roll(params, (results) => {
     if (!results) {
       console.log("error");
     } else {
@@ -368,7 +368,6 @@ app.post("/ExtraCulturalStudentDisplay", (req, res) => {
   params = req.body;
   fetch_ec_culturals_activity_student.fetch_ec_culturals_activity_student(
     (results) => {
-      // console.log(results);
       res.send(JSON.stringify(results));
     }
   );
@@ -376,10 +375,7 @@ app.post("/ExtraCulturalStudentDisplay", (req, res) => {
 
 app.post("/ExtraCulturalCADisplay", (req, res) => {
   params = req.body;
-  // console.log("KKKK");
-  console.log(params);
   fetch_ec_culturals_activity.fetch_ec_culturals_activity((results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -575,7 +571,7 @@ app.post("/comp_stud_display", (req, res) => {
     res.send(JSON.stringify(results));
   });
 });
-app.post("/comp_delete", (req, res) => {
+app.post("/comp_ca_display", (req, res) => {
   params = req.body;
   pd_competitions.PdComp_CA_display((results) => {
     res.send(JSON.stringify(results));
@@ -1008,6 +1004,7 @@ app.post("/Miniproj_insert", (req, res) => {
     res.send(JSON.stringify(results));
   });
 });
+
 /* --------------------------------------------------------- */
 /* PD Inplant Training */
 app.post("/Inplant_display", (req, res) => {
@@ -1101,7 +1098,6 @@ app.post("/Industrialv_insert", (req, res) => {
 app.post("/ProfessionalDevelopmentCA", (req, res) => {
   params = req.body;
   student_details.fetch_students_details_pd(params, (results) => {
-    console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1110,11 +1106,9 @@ app.post("/ProfessionalDevelopmentCA", (req, res) => {
 app.post("/InternshipGraphCA", (req, res) => {
   params = req.body;
   charts.GenerateInternshipCharts(params, (results) => {
-    // console.log(results);
     let placement_lst = results.map((item) => {
       return item.intern_count;
     });
-    // console.log(placement_lst);
     let batches = results.map((item) => {
       return item.batch;
     });
@@ -1134,6 +1128,7 @@ const PORT = process.env.PORT || 5000;
 //   console.log(`Server running in port :"${PORT}"`)
 // );
 // http://192.168.1.145:80
+
 http.listen(PORT, () => {
   console.log(`Server running in port :"${PORT}"`);
 });
