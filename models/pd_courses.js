@@ -1,8 +1,10 @@
+/** @format */
+
 const connection = require("../config/dbconfig");
 
 function PdCour_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_courses` inner join student_details on pd_courses.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_courses` inner join student_details on pd_courses.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {
@@ -98,10 +100,10 @@ function PdCour_Stud_insert(callback) {
     "INSERT INTO pd_courses(roll_no,course_name,date,outcome,verified) VALUES(?,?,?,?,?)",
     [
       params.StudentDetails,
-      params.course_name,
-      params.date,
-      params.outcome,
-      params.verified,
+      params.Course,
+      params.DateYear,
+      params.Outcome,
+      params.status,
     ],
     (err, results, fields) => {
       if (err) {

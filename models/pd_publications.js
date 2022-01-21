@@ -1,8 +1,10 @@
+/** @format */
+
 const connection = require("../config/dbconfig");
 
 function PdPublica_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_publications` inner join student_details on pd_publications.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_publications` inner join student_details on pd_publications.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {
@@ -76,7 +78,6 @@ function PdPublica_edit(callback) {
   connection.query(
     "UPDATE `pd_publications` SET conf_or_journal = ?,name = ?,title = ?,impact_factor = ?,indexed_in = ?, credits=? WHERE (s_no = ?)",
     [
-      params.StudentDetails,
       params.conf_or_journal,
       params.name,
       params.title,

@@ -1,8 +1,10 @@
+/** @format */
+
 const connection = require("../config/dbconfig");
 
 function PdIndustry_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_industrial_visit` inner join student_details on pd_industrial_visit.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_industrial_visit` inner join student_details on pd_industrial_visit.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {
@@ -98,10 +100,10 @@ function PdIndustry_Stud_insert(callback) {
     "INSERT INTO pd_industrial_visit(roll_no,industry_name,date,outcome,verified) VALUES(?,?,?,?,?)",
     [
       params.StudentDetails,
-      params.industry_name,
-      params.date,
-      params.outcome,
-      params.verified,
+      params.Industry,
+      params.DateYear,
+      params.Outcome,
+      params.status,
     ],
     (err, results, fields) => {
       if (err) {

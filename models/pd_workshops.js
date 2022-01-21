@@ -4,7 +4,7 @@ const connection = require("../config/dbconfig");
 
 function PdWork_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_workshops` inner join student_details on pd_workshops.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_workshops` inner join student_details on pd_workshops.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {
@@ -83,7 +83,7 @@ function PdWork_edit(callback) {
       params.date,
       params.outcome,
       params.credits,
-      params.s_no,
+      params.columnid,
     ],
     (err, results, fields) => {
       if (err) {

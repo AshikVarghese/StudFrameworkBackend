@@ -4,7 +4,7 @@ const connection = require("../config/dbconfig");
 
 function PdMotive_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_motivational_talk` inner join student_details on pd_motivational_talk.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_motivational_talk` inner join student_details on pd_motivational_talk.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {
@@ -76,9 +76,10 @@ function PdMotive_delete(callback) {
 
 function PdMotive_edit(callback) {
   connection.query(
-    "UPDATE `pd_motivational_talk` SET topic = ?,resource_person = ?,outcome = ?, credits = ? WHERE (s_no = ?)",
+    "UPDATE `pd_motivational_talk` SET topic = ?,date= ?,resource_person = ?,outcome = ?, credits = ? WHERE (s_no = ?)",
     [
       params.topic,
+      params.date,
       params.resource_person,
       params.outcome,
       params.credits,

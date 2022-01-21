@@ -4,7 +4,7 @@ const connection = require("../config/dbconfig");
 
 function PdInplant_Stud_display(callback) {
   connection.query(
-    "SELECT * FROM `pd_inplant_training` inner join student_details on pd_inplant_training.roll_no = student_details.roll_no WHERE(roll_no=?)",
+    "SELECT * FROM `pd_inplant_training` inner join student_details on pd_inplant_training.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
     (err, results, fields) => {
       if (err) {
@@ -77,7 +77,13 @@ function PdInplant_delete(callback) {
 function PdInplant_edit(callback) {
   connection.query(
     "UPDATE `pd_inplant_training` SET industry = ?,date = ?,outcome = ?, credits = ? WHERE (s_no = ?)",
-    [params.industry, params.date, params.outcome, params.credits, params.columnid],
+    [
+      params.industry,
+      params.date,
+      params.outcome,
+      params.credits,
+      params.columnid,
+    ],
     (err, results, fields) => {
       if (err) {
         console.log(err);
