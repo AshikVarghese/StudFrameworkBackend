@@ -82,7 +82,7 @@ function PdFinal_edit(callback) {
       params.objective,
       params.outcome,
       params.credits,
-      params.s_no,
+      params.columnid,
     ],
     (err, results, fields) => {
       if (err) {

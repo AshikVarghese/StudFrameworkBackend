@@ -76,9 +76,10 @@ function PdMotive_delete(callback) {
 
 function PdMotive_edit(callback) {
   connection.query(
-    "UPDATE `pd_motivational_talk` SET topic = ?,resource_person = ?,outcome = ?, credits = ? WHERE (s_no = ?)",
+    "UPDATE `pd_motivational_talk` SET topic = ?,date= ?,resource_person = ?,outcome = ?, credits = ? WHERE (s_no = ?)",
     [
       params.topic,
+      params.date,
       params.resource_person,
       params.outcome,
       params.credits,

@@ -82,7 +82,7 @@ function PdGuest_edit(callback) {
       params.resource_person,
       params.outcome,
       params.credits,
-      params.s_n0,
+      params.columnid,
     ],
     (err, results, fields) => {
       if (err) {

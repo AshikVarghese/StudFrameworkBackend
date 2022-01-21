@@ -83,7 +83,7 @@ function PdWeb_edit(callback) {
       params.date,
       params.outcome,
       params.credits,
-      params.s_no,
+      params.columnid,
     ],
     (err, results, fields) => {
       if (err) {

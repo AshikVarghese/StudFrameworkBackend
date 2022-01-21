@@ -78,7 +78,6 @@ function PdPlace_edit(callback) {
   connection.query(
     "UPDATE `pd_placement` SET aptitude = ?,soft_skills = ?,reasoning = ?,technical_training = ?, credits=? WHERE (s_no = ?)",
     [
-      params.StudentDetails,
       params.aptitude,
       params.soft_skills,
       params.reasoning,

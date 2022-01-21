@@ -78,7 +78,6 @@ function PdPublica_edit(callback) {
   connection.query(
     "UPDATE `pd_publications` SET conf_or_journal = ?,name = ?,title = ?,impact_factor = ?,indexed_in = ?, credits=? WHERE (s_no = ?)",
     [
-      params.StudentDetails,
       params.conf_or_journal,
       params.name,
       params.title,
