@@ -1054,12 +1054,14 @@ app.post("/Inplant_insert", (req, res) => {
 app.post("/Industrialv_display", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_Stud_display((results) => {
+    console.log(results);
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Industrialv_cadisplay", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_CA_display((results) => {
+    console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1097,6 +1099,14 @@ app.post("/Industrialv_insert", (req, res) => {
 
 app.post("/ProfessionalDevelopmentCA", (req, res) => {
   params = req.body;
+  student_details.fetch_students_details_pd(params, (results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+
+app.post("/ProfessionalDevelopmentHOD", (req, res) => {
+  params = req.body;
+  params.batch = "None";
   student_details.fetch_students_details_pd(params, (results) => {
     res.send(JSON.stringify(results));
   });
