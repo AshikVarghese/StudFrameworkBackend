@@ -508,6 +508,13 @@ app.post("/GeneratePlacementCharts", (req, res) => {
   });
 });
 
+app.post("/GenerateAcademicsCharts", (req, res) => {
+  params = req.body;
+  GenerateAcademicsCharts.GenerateAcademicsCharts((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+
 app.post("/getColumnName", (req, res) => {
   params = req.body;
   fetch_academic_columns.fetch_academic_columns((results) => {
@@ -1102,12 +1109,28 @@ app.post("/ProfessionalDevelopmentCA", (req, res) => {
   });
 });
 
+
 /* -------------- GRAPHS -----------------------*/
 app.post("/InternshipGraphCA", (req, res) => {
   params = req.body;
   charts.GenerateInternshipCharts(params, (results) => {
-    let placement_lst = results.map((item) => {
+    let intern_lst = results.map((item) => {
       return item.intern_count;
+    });
+    let batches = results.map((item) => {
+      return item.batch;
+    });
+    res.send(
+      JSON.stringify({ intern_lst: intern_lst, batches: batches })
+    );
+  });
+});
+
+app.post("/PlacementGraphCA", (req, res) => {
+  params = req.body;
+  charts.GeneratePlacementCharts(params, (results) => {
+    let placement_lst = results.map((item) => {
+      return item.placement_count;
     });
     let batches = results.map((item) => {
       return item.batch;
@@ -1117,6 +1140,21 @@ app.post("/InternshipGraphCA", (req, res) => {
     );
   });
 });
+
+// app.post("/InternshipGraphCA", (req, res) => {
+//   params = req.body;
+//   charts.GenerateInternshipCharts(params, (results) => {
+//     let placement_lst = results.map((item) => {
+//       return item.intern_count;
+//     });
+//     let batches = results.map((item) => {
+//       return item.batch;
+//     });
+//     res.send(
+//       JSON.stringify({ placement_lst: placement_lst, batches: batches })
+//     );
+//   });
+// });
 
 // Deployment
 // const PORT = process.env.PORT || 8080;
