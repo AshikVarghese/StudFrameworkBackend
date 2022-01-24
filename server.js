@@ -515,6 +515,13 @@ app.post("/GenerateAcademicsCharts", (req, res) => {
   });
 });
 
+app.post("/GenerateAcademicSummaryCharts", (req, res) => {
+  params = req.body;
+  GenerateAcademicSummaryCharts.GenerateAcademicSummaryCharts((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+
 app.post("/getColumnName", (req, res) => {
   params = req.body;
   fetch_academic_columns.fetch_academic_columns((results) => {
@@ -1128,6 +1135,7 @@ app.post("/InternshipGraphCA", (req, res) => {
 
 app.post("/PlacementGraphCA", (req, res) => {
   params = req.body;
+  params.dept = params.dept.toUpperCase();
   charts.GeneratePlacementCharts(params, (results) => {
     let placement_lst = results.map((item) => {
       return item.placement_count;
@@ -1135,8 +1143,37 @@ app.post("/PlacementGraphCA", (req, res) => {
     let batches = results.map((item) => {
       return item.batch;
     });
+    console.log(results)
     res.send(
       JSON.stringify({ placement_lst: placement_lst, batches: batches })
+    );
+  });
+});
+
+app.post("/AcademicsGraphCA", (req, res) => {
+  params = req.body;
+  params.dept = params.dept.toUpperCase();
+  charts.GenerateAcademicsCharts(params, (results) => {
+    console.log(results)
+    res.send(
+      JSON.stringify({results})
+    );
+  });
+});
+
+app.post("/AcademicSummaryGraphCA", (req, res) => {
+  params = req.body;
+  params.dept = params.dept.toUpperCase();
+  charts.GenerateAcademicSummaryCharts(params, (results) => {
+    let student_lst = results.map((item) => {
+      return item.student_count;
+    });
+    let CGPA = results.map((item) => {
+      return item.CGPA;
+    });
+    console.log(results)
+    res.send(
+      JSON.stringify({ student_lst: student_lst, CGPA: CGPA })
     );
   });
 });
