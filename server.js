@@ -1068,12 +1068,14 @@ app.post("/Inplant_insert", (req, res) => {
 app.post("/Industrialv_display", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_Stud_display((results) => {
+    console.log(results);
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Industrialv_cadisplay", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_CA_display((results) => {
+    console.log(results);
     res.send(JSON.stringify(results));
   });
 });

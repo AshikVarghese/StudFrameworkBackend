@@ -175,6 +175,102 @@ function GenerateAcademicSummaryCharts(params, callback) {
   }
 
 
+function GenerateAcademicsCharts(params, callback) {
+  if (params.dept != null) {
+    connection.query(
+      "SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='academics'",
+      (err, results, fields) => {
+        if (err) {
+          return callback(false);
+        }
+        // Fetching column names
+        let columns = results.map((col) => col.COLUMN_NAME);
+
+        // Getting the exam column names
+        let exam_columns = columns.filter((column) => {
+          if (column != "id" && column != "subj_id" && column != "roll_no") {
+            return column;
+          }
+        });
+
+        // Repeating the exam column twice for question marks in exam
+        exam_columns = exam_columns.map((column) => {
+          return [column, column];
+        });
+
+        // Converting 2d array to single array
+        exam_columns = [].concat(...exam_columns);
+        exam_columns.push(params.dept);
+
+        // Generating the query
+        let conditional = "COUNT(IF(?>40,1,null)) as ?,".repeat(
+          exam_columns.length - 1
+        );
+
+        // Final query
+        let query =
+          conditional +
+          "COUNT(IF(?>40,1,null)) as ?,student_details.batch from academics inner join student_details on academics.roll_no = student_details.roll_no where student_details.dept = ? group by subj_id,student_details.batch";
+
+        connection.query(query, exam_columns, (err, results, fields) => {
+          if (err) {
+            console.log(err);
+            //   throw err;
+          } else {
+            return callback(results);
+          }
+        });
+      }
+    );
+  } else {
+    connection.query(
+      "SELECT * FROM INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='academics'",
+      (err, results, fields) => {
+        if (err) {
+          return callback(false);
+        }
+        // Fetching column names
+        let columns = results.map((col) => col.COLUMN_NAME);
+
+        // Getting the exam column names
+        let exam_columns = columns.filter((column) => {
+          if (column != "id" && column != "subj_id" && column != "roll_no") {
+            return column;
+          }
+        });
+
+        // Repeating the exam column twice for question marks in exam
+        exam_columns = exam_columns.map((column) => {
+          return [column, column];
+        });
+
+        // Converting 2d array to single array
+        exam_columns = [].concat(...exam_columns);
+        exam_columns.push(params.dept);
+
+        // Generating the query
+        let conditional = "COUNT(IF(?>40,1,null)) as ?,".repeat(
+          exam_columns.length - 1
+        );
+
+        // Final query
+        let query =
+          conditional +
+          "COUNT(IF(?>40,1,null)) as ?,student_details.batch from academics inner join student_details on academics.roll_no = student_details.roll_no group by subj_id,student_details.batch";
+
+        connection.query(query, exam_columns, (err, results, fields) => {
+          if (err) {
+            console.log(err);
+            //   throw err;
+          } else {
+            return callback(results);
+          }
+        });
+      }
+    );
+  }
+}
+
 module.exports = {
   GenerateInternshipCharts: GenerateInternshipCharts,
   GeneratePlacementCharts: GeneratePlacementCharts,
