@@ -138,6 +138,25 @@ function GenerateAcademicSummaryChartsHOD(params, callback) {
   }
 }
 
+// Academic Summary Charts
+function GenerateAcademicSummaryCharts(params, callback) {
+  if (params.dept != null) {
+    connection.query(
+      "SELECT batch,CGPA,count(CGPA) as student_count from student_details as stud inner join academic_summary as academicsummary on stud.roll_no=academicsummary.roll_no where stud.dept= ? and stud.batch='2019-2023' group by CGPA;",
+      [params.dept],
+      (err, results, fields) => {
+        if (err) {
+          console.log(err);
+          //   throw err;
+        } else {
+          // console.log(results);
+          return callback(results);
+        }
+      }
+    );
+  }
+}
+
 module.exports = {
   GenerateInternshipChartsHOD: GenerateInternshipChartsHOD,
   GeneratePlacementChartsHOD: GeneratePlacementChartsHOD,
