@@ -2,18 +2,33 @@ const concurrently = require("concurrently");
 const connection = require("../config/dbconfig");
 
 function ExtracurricularCA_display(params, callback) {
-  connection.query(
-    "SELECT * from student_details where student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_club_activity) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_culturals) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_outreach) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_sports) and dept=? and batch=?;",
-    [params.dept, params.batch],
-    (err, results, fields) => {
-      if (err) {
-        console.log(err);
-        return callback(false);
-      } else {
-        return callback(results);
+  if (params.batch != "None") {
+    connection.query(
+      "SELECT * from student_details where (student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_club_activity) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_culturals) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_outreach) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_sports)) and dept=? and batch=?;",
+      [params.dept, params.batch],
+      (err, results, fields) => {
+        if (err) {
+          console.log(err);
+          return callback(false);
+        } else {
+          return callback(results);
+        }
       }
-    }
-  );
+    );
+  } else {
+    connection.query(
+      "SELECT * from student_details where (student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_club_activity) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_culturals) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_outreach) or student_details.roll_no in (SELECT DISTINCT(roll_no) from ec_sports)) and dept=?;",
+      [params.dept],
+      (err, results, fields) => {
+        if (err) {
+          console.log(err);
+          return callback(false);
+        } else {
+          return callback(results);
+        }
+      }
+    );
+  }
 }
 
 function ExtraClub_Stud_display(callback) {
