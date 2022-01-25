@@ -1118,65 +1118,68 @@ app.post("/ProfessionalDevelopmentCA", (req, res) => {
   });
 });
 
+app.post("/ProfessionalDevelopmentHOD", (req, res) => {
+  params = req.body;
+  params.batch = "None";
+  student_details.fetch_students_details_pd(params, (results) => {
+    res.send(JSON.stringify(results));
+  });
+});
 
 /* -------------- GRAPHS -----------------------*/
-app.post("/InternshipGraphCA", (req, res) => {
+app.post("/InternshipGraphHOD", (req, res) => {
   params = req.body;
-  charts.GenerateInternshipCharts(params, (results) => {
+  charts.GenerateInternshipChartsHOD(params, (results) => {
+    console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
     });
     let batches = results.map((item) => {
       return item.batch;
     });
-    res.send(
-      JSON.stringify({ intern_lst: intern_lst, batches: batches })
-    );
+
+    res.send(JSON.stringify({ intern_lst: intern_lst, batches: batches }));
   });
 });
 
-app.post("/PlacementGraphCA", (req, res) => {
+app.post("/PlacementGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
-  charts.GeneratePlacementCharts(params, (results) => {
+  charts.GeneratePlacementChartsHOD(params, (results) => {
     let placement_lst = results.map((item) => {
       return item.placement_count;
     });
     let batches = results.map((item) => {
       return item.batch;
     });
-    console.log(results)
+    // console.log(results);
     res.send(
       JSON.stringify({ placement_lst: placement_lst, batches: batches })
     );
   });
 });
 
-app.post("/AcademicsGraphCA", (req, res) => {
+app.post("/AcademicsGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
-  charts.GenerateAcademicsCharts(params, (results) => {
-    console.log(results)
-    res.send(
-      JSON.stringify({results})
-    );
+  charts.GenerateAcademicsChartsHOD(params, (results) => {
+    // console.log(results);
+    res.send(JSON.stringify({ results }));
   });
 });
 
-app.post("/AcademicSummaryGraphCA", (req, res) => {
+app.post("/AcademicSummaryGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
-  charts.GenerateAcademicSummaryCharts(params, (results) => {
+  charts.GenerateAcademicSummaryChartsHOD(params, (results) => {
     let student_lst = results.map((item) => {
       return item.student_count;
     });
     let CGPA = results.map((item) => {
       return item.CGPA;
     });
-    console.log(results)
-    res.send(
-      JSON.stringify({ student_lst: student_lst, CGPA: CGPA })
-    );
+    // console.log(results);
+    res.send(JSON.stringify({ student_lst: student_lst, CGPA: CGPA }));
   });
 });
 
