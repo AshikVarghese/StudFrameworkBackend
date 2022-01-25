@@ -1124,6 +1124,14 @@ app.post("/ProfessionalDevelopmentCA", (req, res) => {
   });
 });
 
+app.post("/ProfessionalDevelopmentHOD", (req, res) => {
+  params = req.body;
+  params.batch = "None";
+  student_details.fetch_students_details_pd(params, (results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+
 
 /* -------------- GRAPHS -----------------------*/
 app.post("/InternshipGraphCA", (req, res) => {
