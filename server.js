@@ -1152,6 +1152,58 @@ app.post("/PlacementGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GeneratePlacementChartsHOD(params, (results) => {
+    console.log(results);
+    let placement_lst = results.map((item) => {
+      return item.placement_count;
+    });
+    let batches = results.map((item) => {
+      return item.batch;
+    });
+    // console.log(results);
+    res.send(
+      JSON.stringify({ placement_lst: placement_lst, batches: batches })
+    );
+  });
+});
+
+app.post("/AcademicsGraphHOD", (req, res) => {
+  params = req.body;
+  params.dept = params.dept.toUpperCase();
+  charts.GenerateAcademicsChartsHOD(params, (results) => {
+    console.log(results);
+    res.send(JSON.stringify({ results }));
+  });
+});
+
+app.post("/AcademicSummaryGraphHOD", (req, res) => {
+  params = req.body;
+  params.dept = params.dept.toUpperCase();
+  charts.GenerateAcademicSummaryChartsHOD(params, (results) => {
+    console.log(results);
+    res.send(JSON.stringify(results));
+  });
+});
+
+app.post("/InternshipGraphCA", (req, res) => {
+  params = req.body;
+  charts.GenerateInternshipChartsHOD(params, (results) => {
+    console.log(results);
+    let intern_lst = results.map((item) => {
+      return item.intern_count;
+    });
+    let batches = results.map((item) => {
+      return item.batch;
+    });
+
+    res.send(JSON.stringify({ intern_lst: intern_lst, batches: batches }));
+  });
+});
+
+app.post("/PlacementGraphCA", (req, res) => {
+  params = req.body;
+  params.dept = params.dept.toUpperCase();
+  charts.GeneratePlacementChartsHOD(params, (results) => {
+    console.log(results);
     let placement_lst = results.map((item) => {
       return item.placement_count;
     });

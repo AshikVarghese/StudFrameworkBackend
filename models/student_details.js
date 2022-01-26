@@ -1,6 +1,5 @@
 const { param } = require("express-validator");
 const connection = require("../config/dbconfig");
-//B.batch,B.dept,B.quota,B.gender,B.dob,B.father_name,B.mother_name,B.father_mob_no,B.mother_mob_no,B.religion,B.address password
 
 // Fetch Student Details
 function fetch_student_details(params, callback) {
