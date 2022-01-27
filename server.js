@@ -1220,7 +1220,7 @@ app.post("/PlacementGraphCA", (req, res) => {
   });
 });
 
-app.post("/AcademicsGraphCA", (req, res) => {
+app.post("/AcademicsGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GenerateAcademicsChartsCA(params, (results) => {
@@ -1228,7 +1228,7 @@ app.post("/AcademicsGraphCA", (req, res) => {
   });
 });
 
-app.post("/AcademicSummaryGraphCA", (req, res) => {
+app.post("/AcademicSummaryGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GenerateAcademicSummaryChartsCA(params, (results) => {
