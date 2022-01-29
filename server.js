@@ -125,7 +125,7 @@ app.post("/passchange", (req, res) => {
 
 app.post("/studentinsert", (req, res) => {
   params = req.body;
-  console.log(params);
+  // console.log(params);
   student_insert.student_insert(params, (results) => {
     if (!results) {
       console.log("error");
@@ -175,7 +175,7 @@ app.post("/GeneralOfficialDepartment", (req, res) => {
 app.post("/Academic", (req, res) => {
   params = req.body;
   academic_details.fetch_academic_details_classadvisor(params, (results) => {
-    console.log(results);
+    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -183,7 +183,7 @@ app.post("/Academic", (req, res) => {
 app.post("/AcademicsData", (req, res) => {
   params = req.body;
   academic_details.fetch_academic_values(params, (results) => {
-    console.log(params);
+    // console.log(params);
     res.send(JSON.stringify(results));
   });
 });
@@ -1074,14 +1074,14 @@ app.post("/Inplant_insert", (req, res) => {
 app.post("/Industrialv_display", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_Stud_display((results) => {
-    console.log(results);
+    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Industrialv_cadisplay", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_CA_display((results) => {
-    console.log(results);
+    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1138,7 +1138,7 @@ app.post("/ProfessionalDevelopmentHOD", (req, res) => {
 app.post("/InternshipGraphHOD", (req, res) => {
   params = req.body;
   charts.GenerateInternshipChartsHOD(params, (results) => {
-    console.log(results);
+    // console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
     });
@@ -1154,7 +1154,7 @@ app.post("/PlacementGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GeneratePlacementChartsHOD(params, (results) => {
-    console.log(results);
+    // console.log(results);
     let placement_lst = results.map((item) => {
       return item.placement_count;
     });
@@ -1172,7 +1172,7 @@ app.post("/AcademicsGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GenerateAcademicsChartsHOD(params, (results) => {
-    console.log(results);
+    //console.log(results);
     res.send(JSON.stringify({ results }));
   });
 });
@@ -1181,7 +1181,7 @@ app.post("/AcademicSummaryGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GenerateAcademicSummaryChartsHOD(params, (results) => {
-    console.log(results);
+    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1190,7 +1190,7 @@ app.post("/AcademicSummaryGraphHOD", (req, res) => {
 app.post("/InternshipGraphCA", (req, res) => {
   params = req.body;
   charts.GenerateInternshipChartsCA(params, (results) => {
-    console.log(results);
+    // console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
     });
@@ -1206,7 +1206,7 @@ app.post("/PlacementGraphCA", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GeneratePlacementChartsCA(params, (results) => {
-    console.log(results);
+    // console.log(results);
     let placement_lst = results.map((item) => {
       return item.placement_count;
     });
@@ -1239,7 +1239,7 @@ app.post("/AcademicSummaryGraphHOD", (req, res) => {
 /* -------------- Official GRAPHS -----------------------*/
 app.post("/InternshipGraphOfficial", (req, res) => {
   charts.GenerateInternshipChartsOfficial((results) => {
-    console.log(results);
+    // console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
     });
@@ -1263,6 +1263,16 @@ app.post("/PlacementGraphOfficial", (req, res) => {
       JSON.stringify({ placement_lst: placement_lst, batches: batches })
     );
   });
+});
+
+app.get("/download_template", (req, res) => {
+  res.download(
+    "./models/template/academic_details.xlsx",
+    "template.xlsx",
+    (err) => {
+      console.log(err);
+    }
+  );
 });
 
 const PORT = process.env.PORT || 5000;
