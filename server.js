@@ -1133,6 +1133,8 @@ app.post("/ProfessionalDevelopmentHOD", (req, res) => {
 });
 
 /* -------------- GRAPHS -----------------------*/
+
+/* -------------- HOD GRAPHS -----------------------*/
 app.post("/InternshipGraphHOD", (req, res) => {
   params = req.body;
   charts.GenerateInternshipChartsHOD(params, (results) => {
@@ -1184,9 +1186,10 @@ app.post("/AcademicSummaryGraphHOD", (req, res) => {
   });
 });
 
+/* -------------- Class Advisor GRAPHS -----------------------*/
 app.post("/InternshipGraphCA", (req, res) => {
   params = req.body;
-  charts.GenerateInternshipChartsHOD(params, (results) => {
+  charts.GenerateInternshipChartsCA(params, (results) => {
     console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
@@ -1202,7 +1205,7 @@ app.post("/InternshipGraphCA", (req, res) => {
 app.post("/PlacementGraphCA", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
-  charts.GeneratePlacementChartsHOD(params, (results) => {
+  charts.GeneratePlacementChartsCA(params, (results) => {
     console.log(results);
     let placement_lst = results.map((item) => {
       return item.placement_count;
@@ -1220,46 +1223,48 @@ app.post("/PlacementGraphCA", (req, res) => {
 app.post("/AcademicsGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
-  charts.GenerateAcademicsChartsHOD(params, (results) => {
-    // console.log(results);
-    res.send(JSON.stringify({ results }));
+  charts.GenerateAcademicsChartsCA(params, (results) => {
+    res.send(JSON.stringify(results));
   });
 });
 
 app.post("/AcademicSummaryGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
-  charts.GenerateAcademicSummaryChartsHOD(params, (results) => {
-    let student_lst = results.map((item) => {
-      return item.student_count;
-    });
-    let CGPA = results.map((item) => {
-      return item.CGPA;
-    });
-    // console.log(results);
-    res.send(JSON.stringify({ student_lst: student_lst, CGPA: CGPA }));
+  charts.GenerateAcademicSummaryChartsCA(params, (results) => {
+    res.send(JSON.stringify(results));
   });
 });
 
-// app.post("/InternshipGraphCA", (req, res) => {
-//   params = req.body;
-//   charts.GenerateInternshipCharts(params, (results) => {
-//     let placement_lst = results.map((item) => {
-//       return item.intern_count;
-//     });
-//     let batches = results.map((item) => {
-//       return item.batch;
-//     });
-//     res.send(
-//       JSON.stringify({ placement_lst: placement_lst, batches: batches })
-//     );
-//   });
-// });
+/* -------------- Official GRAPHS -----------------------*/
+app.post("/InternshipGraphOfficial", (req, res) => {
+  charts.GenerateInternshipChartsOfficial((results) => {
+    console.log(results);
+    let intern_lst = results.map((item) => {
+      return item.intern_count;
+    });
+    let batches = results.map((item) => {
+      return item.dept;
+    });
 
-// Deployment
-// const PORT = process.env.PORT || 8080;
+    res.send(JSON.stringify({ intern_lst: intern_lst, batches: batches }));
+  });
+});
 
-// Dev
+app.post("/PlacementGraphOfficial", (req, res) => {
+  charts.GeneratePlacementChartsOfficial((results) => {
+    let placement_lst = results.map((item) => {
+      return item.placement_count;
+    });
+    let batches = results.map((item) => {
+      return item.dept;
+    });
+    res.send(
+      JSON.stringify({ placement_lst: placement_lst, batches: batches })
+    );
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 // const server = app.listen(PORT,() =>
