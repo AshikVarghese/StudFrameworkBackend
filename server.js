@@ -172,6 +172,11 @@ app.post("/GeneralOfficialDepartment", (req, res) => {
   });
 });
 
+app.post("/GeneralOfficialBatch", (req, res) => {
+  student_details.fetch_students_details_official_batch((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
 app.post("/Academic", (req, res) => {
   params = req.body;
   academic_details.fetch_academic_details_classadvisor(params, (results) => {
