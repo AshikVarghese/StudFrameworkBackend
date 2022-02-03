@@ -95,6 +95,17 @@ function fetch_students_details_official_department(callback) {
     }
   );
 }
+function fetch_students_details_official_batch(callback) {
+  connection.query(
+    "SELECT * FROM `student`.`student_details` GROUP BY `batch` ",
+    (err, results, fields) => {
+      if (err) {
+        return callback(false);
+      }
+      return callback(results);
+    }
+  );
+}
 
 function insert_student_details(params, callback) {
   connection.query(
@@ -268,4 +279,5 @@ module.exports = {
   delete_student_details,
   fetch_students_details_pd,
   fetch_students_details_official_department,
+  fetch_students_details_official_batch,
 };
