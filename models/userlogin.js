@@ -11,7 +11,6 @@ function user_login(params, callback) {
       '";',
     (err, details, fields) => {
       if (err) {
-        console.log(err);
         return callback("user-fail");
       } else {
         if (details.length == 0) {
@@ -22,9 +21,7 @@ function user_login(params, callback) {
           .createHash("sha512")
           .update(params.password)
           .digest("hex");
-        console.log(password);
         if (password === details[0].password) {
-          console.log("Password matched with hashed password");
           var auth_token = crypto
             .createHash("sha512")
             .update(crypto.randomBytes(32).toString("hex"))
@@ -40,7 +37,6 @@ function user_login(params, callback) {
               '");',
             (err, results, fields) => {
               if (err) {
-                console.log(err);
                 return callback("server-down");
               } else {
                 return callback(details);
