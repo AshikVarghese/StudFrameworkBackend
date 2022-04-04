@@ -1,6 +1,5 @@
 var crypto = require("crypto");
 const connection = require("../config/dbconfig");
-const { generate_password_hashed } = require("../config/hashconfig");
 
 function user_login(params, callback) {
   table = "student";
@@ -12,10 +11,8 @@ function user_login(params, callback) {
       '";',
     (err, details, fields) => {
       if (err) {
-        console.log(err)
         return callback("user-fail");
       } else {
-        console.log(params.email);
         if (details.length == 0) {
           return callback("user-fail");
         }
@@ -53,4 +50,15 @@ function user_login(params, callback) {
     }
   );
 }
-module.exports = { user_login: user_login };
+
+function get_login_details(params, callback) {
+  connection.query("SELECT `email`,`password`, `roll_no`, `dept`, `batch`, `user_type` FROM `login_details`",(err,results,fields)=>{
+    if (err) {
+      return callback("server-down");
+    } else {
+      return callback(results);
+    }
+  })
+}
+
+module.exports = { user_login: user_login, get_login_details:get_login_details };
