@@ -1,5 +1,6 @@
 var crypto = require("crypto");
 const connection = require("../config/dbconfig");
+const { generate_password_hashed } = require("../config/hashconfig");
 
 function user_login(params, callback) {
   table = "student";
@@ -11,9 +12,10 @@ function user_login(params, callback) {
       '";',
     (err, details, fields) => {
       if (err) {
-        console.log(err);
+        console.log(err)
         return callback("user-fail");
       } else {
+        console.log(params.email);
         if (details.length == 0) {
           return callback("user-fail");
         }
@@ -22,9 +24,7 @@ function user_login(params, callback) {
           .createHash("sha512")
           .update(params.password)
           .digest("hex");
-        console.log(password);
         if (password === details[0].password) {
-          console.log("Password matched with hashed password");
           var auth_token = crypto
             .createHash("sha512")
             .update(crypto.randomBytes(32).toString("hex"))
@@ -40,7 +40,6 @@ function user_login(params, callback) {
               '");',
             (err, results, fields) => {
               if (err) {
-                console.log(err);
                 return callback("server-down");
               } else {
                 return callback(details);

@@ -57,6 +57,7 @@ const pd_publications = require("./models/pd_publications");
 const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
 
+const admin = require("./models/admin");
 const temp = require("./models/temp");
 
 const academic_details = require("./models/academic_details");
@@ -172,6 +173,11 @@ app.post("/GeneralOfficialDepartment", (req, res) => {
   });
 });
 
+app.post("/GeneralOfficialBatch", (req, res) => {
+  student_details.fetch_students_details_official_batch((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
 app.post("/Academic", (req, res) => {
   params = req.body;
   academic_details.fetch_academic_details_classadvisor(params, (results) => {
@@ -1275,7 +1281,43 @@ app.get("/download_template", (req, res) => {
   );
 });
 
-const PORT = process.env.PORT || 8080;
+// Admin controls - Create 
+app.post("/admin_create_creds", (req, res) => {
+  params = req.body;
+  admin.insert_login_cred(params, (results) => {
+    if (!results) {
+      console.log("error");
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+// Admin controls - Delete 
+app.post("/admin_delete_creds", (req, res) => {
+  params = req.body;
+  admin.remove_cred(params, (results) => {
+    if (!results) {
+      console.log("error");
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+// Admin controls - Edit 
+app.post("/admin_edit_creds", (req, res) => {
+  params = req.body;
+  admin.edit_cred(params, (results) => {
+    if (!results) {
+      console.log("error");
+    } else {
+      res.send(results);
+    }
+  });
+});
+
+const PORT = process.env.PORT || 5000;
 
 // const server = app.listen(PORT,() =>
 //   console.log(`Server running in port :"${PORT}"`)
