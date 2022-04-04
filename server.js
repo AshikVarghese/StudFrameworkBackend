@@ -1317,6 +1317,18 @@ app.post("/admin_edit_creds", (req, res) => {
   });
 });
 
+//Admin controls - Display
+app.post("/admin_get_creds", (req, res) => {
+  params = req.body;
+  user_login.get_login_details(params, (results) => {
+    if (!results) {
+      console.log("error");
+    } else {
+      res.send(results);
+    }
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 // const server = app.listen(PORT,() =>
