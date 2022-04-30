@@ -56,6 +56,7 @@ const pd_placement = require("./models/pd_placement");
 const pd_publications = require("./models/pd_publications");
 const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
+const bkpd = require("./models/bulkuploadpd");
 
 const admin = require("./models/admin");
 const temp = require("./models/temp");
@@ -64,6 +65,21 @@ const academic_details = require("./models/academic_details");
 var cors = require("cors");
 let student_details = require("./models/student_details");
 const charts = require("./models/charts");
+
+const multer  = require('multer')
+var path = require('path')
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'models/uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '.' + file.originalname.split('.')[1]) //Appending .jpg
+  }
+})
+
+
+const upload = multer({ storage: storage })
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -1329,7 +1345,25 @@ app.post("/admin_get_creds", (req, res) => {
   });
 });
 
-// const PORT = process.env.PORT || 8080;
+//bulk for pd
+app.post("/bulkforpd", upload.single('file'),(req,res)=>{
+  var file_present = req.file;
+  if (!file_present) {
+    res.send("no-file");
+  }
+  else{
+    var params = req.body;
+    var req = {"path": req.file.path, "type": params.value}
+    bkpd.bulkuploadpd(req, (results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    })
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 
 // const server = app.listen(PORT,() =>
