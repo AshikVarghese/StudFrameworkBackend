@@ -33,10 +33,10 @@ function bulkuploadpd(value, callback) {
             connection.query(query,(err,results,fields)=>{
                 if(err){
                     console.log(err);
-                    return callback("failure")
+                    return callback("Bulk Upload Failed")
                 }
                 else{
-                    return callback("success");
+                    return callback("BulK Upload Success");
                 }
             })
     //     console.log(pd_arr);

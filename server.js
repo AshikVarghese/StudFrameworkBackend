@@ -56,6 +56,8 @@ const pd_placement = require("./models/pd_placement");
 const pd_publications = require("./models/pd_publications");
 const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
+const pd_aptitude = require("./models/pd_aptitude");
+
 const bkpd = require("./models/bulkuploadpd");
 
 const admin = require("./models/admin");
@@ -1297,6 +1299,14 @@ app.get("/download_template", (req, res) => {
   );
 });
 
+app.get("/download_all/:id",(req,res) => {
+  var file = "./models/template/"+req.params.id;
+  res.download(file,"template.xlsx",
+  (err) => {
+    console.log(err);
+  })
+})
+
 // Admin controls - Create 
 app.post("/admin_create_creds", (req, res) => {
   params = req.body;
@@ -1349,7 +1359,7 @@ app.post("/admin_get_creds", (req, res) => {
 app.post("/bulkforpd", upload.single('file'),(req,res)=>{
   var file_present = req.file;
   if (!file_present) {
-    res.send("no-file");
+    res.send("File Not Found (Please Check)");
   }
   else{
     var params = req.body;
@@ -1362,6 +1372,18 @@ app.post("/bulkforpd", upload.single('file'),(req,res)=>{
       }
     })
   }
+});
+
+//Aptitude edit and delete
+app.post("/aptitude_edit_delete", (req, res) => {
+  params = req.body;
+  pd_aptitude.delete_aptitude(params, (results) => {
+    if (!results) {
+      console.log("error");
+    } else {
+      res.send(results);
+    }
+  });
 });
 
 const PORT = process.env.PORT || 5000;
