@@ -14,7 +14,7 @@ function get_aptitude(callback) {
   );
 }
 
-function edit_aptitude(params) {
+function edit_aptitude(callback) {
   connection.query("UPDATE `pd_aptitude` SET assessment = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
   [
     params.assessment,
