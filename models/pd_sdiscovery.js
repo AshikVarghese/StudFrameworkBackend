@@ -14,7 +14,7 @@ function get_sdiscovery(callback) {
   );
 }
 
-function edit_sdiscovery(params) {
+function edit_sdiscovery(callback) {
   connection.query("UPDATE `pd_system_discovery` SET components = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
   [
     params.components,
@@ -26,9 +26,9 @@ function edit_sdiscovery(params) {
   (err, results, fields) => {
     if (err) {
       console.log(err);
-      return callback(false);
+      return callback("Edit Failed");
     } else {
-      return callback(results);
+      return callback("Edited Successfully");
     }
    }
   );
