@@ -328,6 +328,19 @@ function GeneratePlacementChartsOfficial(callback) {
     }
   );
 }
+function GenerateCreditsChartCA(callback){
+  connection.query(
+    "Select batch,sum(credits) from pd_competition left join student_details on pd_competition.roll_no = student_details.roll_no group by student_details.batch ",    (err, results, fields) => {
+      if (err) {
+        console.log(err);
+        //   throw err;
+      } else {
+        // console.log(results);
+        return callback(results);
+      }
+    }
+  );
+}
 module.exports = {
   GenerateInternshipChartsOfficial: GenerateInternshipChartsOfficial,
   GeneratePlacementChartsOfficial: GeneratePlacementChartsOfficial,
