@@ -20,7 +20,8 @@ function edit_employability_skill(params) {
     params.assessment,
     params.date,
     params.remarks,
-    params.credits
+    params.credits,
+    params.columnid
   ],
   (err, results, fields) => {
     if (err) {

@@ -14,13 +14,14 @@ function get_soft_skill(callback) {
   );
 }
 
-function edit_soft_skill(params) {
+function edit_soft_skill(callback) {
   connection.query("UPDATE `pd_soft_skill` SET trainer = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
   [
     params.assessment,
     params.date,
     params.remarks,
-    params.credits
+    params.credits,
+    params.columnid
   ],
   (err, results, fields) => {
     if (err) {
