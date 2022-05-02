@@ -1,8 +1,8 @@
 const connection = require("../config/dbconfig");
 
-function get_aptitude(callback) {
+function get_sdiscovery(callback) {
   connection.query(
-    "SELECT * from `pd_aptitude` WHERE(roll_no=?)",
+    "SELECT * from `pd_system_discovery` WHERE(roll_no=?)",
     [params.RollNumber],
     (err, results, fields) => {
       if (err) {
@@ -14,10 +14,10 @@ function get_aptitude(callback) {
   );
 }
 
-function edit_aptitude(params) {
-  connection.query("UPDATE `pd_aptitude` SET assessment = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
+function edit_sdiscovery(params) {
+  connection.query("UPDATE `pd_system_discovery` SET components = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
   [
-    params.assessment,
+    params.components,
     params.date,
     params.remarks,
     params.credits,
@@ -34,9 +34,9 @@ function edit_aptitude(params) {
   );
 }
 
-function delete_aptitude(callback) {
+function delete_sdiscovery(callback) {
     connection.query(
-        "DELETE FROM `pd_aptitude` WHERE (s_no = ?)",
+        "DELETE FROM `pd_system_discovery` WHERE (s_no = ?)",
         [params.columnid],
         (err, results, fields) => {
           if (err) {
@@ -49,7 +49,7 @@ function delete_aptitude(callback) {
 }
 
 module.exports = {
-    edit_aptitude : edit_aptitude,
-    delete_aptitude : delete_aptitude,
-    get_aptitude : get_aptitude
+    edit_sdiscovery : edit_sdiscovery,
+    delete_sdiscovery : delete_sdiscovery,
+    get_sdiscovery : get_sdiscovery
 }

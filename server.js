@@ -57,6 +57,7 @@ const pd_publications = require("./models/pd_publications");
 const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
 const pd_aptitude = require("./models/pd_aptitude");
+const pd_sdiscovery = require("./models/pd_sdiscovery");
 
 const bkpd = require("./models/bulkuploadpd");
 
@@ -1404,6 +1405,40 @@ app.post("/aptitude_edit_delete", (req, res) => {
 app.post("/aptitude_cadisplay", (req, res) => {
   params = req.body;
   pd_aptitude.get_aptitude((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+
+//sdiscovery edit and delete
+app.post("/sdiscovery_edit_delete", (req, res) => {
+  params = req.body;
+  if(params.edit == "no"){
+    pd_sdiscovery.delete_sdiscovery((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  }
+  else if(params.edit == "yes"){
+    pd_sdiscovery.edit_sdiscovery((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    })
+  }
+  else{
+    res.send("Invalid API call");
+  }
+});
+
+//sdiscovery ca display
+app.post("/sdiscovery_cadisplay", (req, res) => {
+  params = req.body;
+  pd_sdiscovery.get_sdiscovery((results) => {
     res.send(JSON.stringify(results));
   });
 });
