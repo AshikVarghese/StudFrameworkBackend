@@ -1377,12 +1377,34 @@ app.post("/bulkforpd", upload.single('file'),(req,res)=>{
 //Aptitude edit and delete
 app.post("/aptitude_edit_delete", (req, res) => {
   params = req.body;
-  pd_aptitude.delete_aptitude(params, (results) => {
-    if (!results) {
-      console.log("error");
-    } else {
-      res.send(results);
-    }
+  if(params.edit == "no"){
+    pd_aptitude.delete_aptitude((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  }
+  else if(params.edit == "yes"){
+    pd_aptitude.edit_aptitude((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    })
+  }
+  else{
+    res.send("Invalid API call");
+  }
+});
+
+//aptitude ca display
+app.post("/aptitude_cadisplay", (req, res) => {
+  params = req.body;
+  pd_aptitude.get_aptitude((results) => {
+    res.send(JSON.stringify(results));
   });
 });
 

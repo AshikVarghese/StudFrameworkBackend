@@ -2,7 +2,7 @@
 
 const connection = require("../config/dbconfig");
 
-function PdPublica_Stud_display(params,callback) {
+function PdPublica_Stud_display(callback) {
   connection.query(
     "SELECT * FROM `pd_publications` inner join student_details on pd_publications.roll_no = student_details.roll_no WHERE(student_details.roll_no=?)",
     [params.StudentDetails],
@@ -16,7 +16,7 @@ function PdPublica_Stud_display(params,callback) {
   );
 }
 
-function PdPublica_CA_display(params,callback) {
+function PdPublica_CA_display(callback) {
   connection.query(
     "SELECT * from pd_publications WHERE(roll_no=?)",
     [params.RollNumber],
@@ -30,7 +30,7 @@ function PdPublica_CA_display(params,callback) {
   );
 }
 
-function ProfDevelop_Stud_display(params,callback) {
+function ProfDevelop_Stud_display(callback) {
   connection.query(
     "SELECT * FROM `pd_publications` WHERE(roll_no=?)",
     [params.StudentDetails],
@@ -44,7 +44,7 @@ function ProfDevelop_Stud_display(params,callback) {
   );
 }
 
-function PdPublica_verify(params,callback) {
+function PdPublica_verify(callback) {
   connection.query(
     "UPDATE `pd_publications` SET verified=? WHERE (s_no = ?)",
     [params.verify, params.columnid],
@@ -59,7 +59,7 @@ function PdPublica_verify(params,callback) {
   );
 }
 
-function PdPublica_delete(params,callback) {
+function PdPublica_delete(callback) {
   connection.query(
     "DELETE FROM `pd_publications` WHERE (s_no = ?)",
     [params.columnid],
@@ -97,7 +97,7 @@ function PdPublica_edit(callback) {
   );
 }
 
-function PdPublica_Stud_insert(params,callback) {
+function PdPublica_Stud_insert(callback) {
   connection.query(
     "INSERT INTO pd_publications(roll_no,conf_or_journal,name,title,impact_factor,indexed_in,verified) VALUES(?,?,?,?,?,?,?)",
     [
