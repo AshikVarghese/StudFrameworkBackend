@@ -23,9 +23,9 @@ function insert_login_cred(params, callback) {
         ],
         (err, results, fields) => {
           if (err) {
-            return callback("server-down");
+            return callback("Creating user failed. Please try again.");
           }
-          return callback("inserted");
+          return callback("Created Successfully");
         }
       );
 }
