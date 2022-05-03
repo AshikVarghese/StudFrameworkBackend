@@ -1502,6 +1502,7 @@ app.post("/get_credits_student", (req, res) => {
     // console.log(results);
     res.send(JSON.stringify(results));
   });
+});
 app.post("/file_upload_admin", upload1.single("file"), (req, res) => {
   var file_present = req.file;
   if (!file_present) {
