@@ -81,7 +81,17 @@ var storage = multer.diskStorage({
   },
 });
 
+var storage1 = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "models/uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "." + file.originalname); //Appending .xlsx
+  },
+});
+
 const upload = multer({ storage: storage });
+const upload1 = multer({ storage: storage1 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -1485,6 +1495,23 @@ app.post("/getcreditsOfficials", (req, res) => {
 
     res.send(JSON.stringify(json_lst));
   });
+});
+
+app.post("/file_upload_admin", upload1.single("file"), (req, res) => {
+  var file_present = req.file;
+  if (!file_present) {
+    res.send("File Not Found (Please Check)");
+  } else {
+    // var params = req.body;
+    var req = { path: req.file.path };
+    bkpd.bulkadmin(req, (results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  }
 });
 
 const PORT = process.env.PORT || 5000;
