@@ -328,9 +328,11 @@ function GeneratePlacementChartsOfficial(callback) {
     }
   );
 }
-function GenerateCreditsChartCA(callback){
+function GenerateCreditsChartCA(callback) {
   connection.query(
-    "SELECT sum(credits) as credits_sum,student_details.batch from (select pd_workshops.credits,pd_workshops.roll_no from pd_workshops union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_courses.credits,pd_courses.roll_no from pd_courses union all select pd_final_project.credits,pd_final_project.roll_no from pd_final_project union all select pd_guest_lecture.credits,pd_guest_lecture.roll_no from pd_guest_lecture union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_industrial_visit.credits,pd_industrial_visit.roll_no from pd_industrial_visit union all select pd_inplant_training.credits,pd_inplant_training.roll_no from pd_inplant_training union all select pd_mini_project.credits,pd_mini_project.roll_no from pd_mini_project union all select pd_motivational_talk.credits,pd_motivational_talk.roll_no from pd_motivational_talk union all select pd_placement.credits,pd_placement.roll_no from pd_placement union all select pd_publications.credits,pd_publications.roll_no from pd_publications) as t1 inner join student_details on t1.roll_no = student_details.roll_no where student_details.dept = ? GROUP by student_details.batch;", [params.dept],(err, results, fields) => {
+    "SELECT sum(credits) as credits_sum,student_details.batch from (select pd_workshops.credits,pd_workshops.roll_no from pd_workshops union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_courses.credits,pd_courses.roll_no from pd_courses union all select pd_final_project.credits,pd_final_project.roll_no from pd_final_project union all select pd_guest_lecture.credits,pd_guest_lecture.roll_no from pd_guest_lecture union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_industrial_visit.credits,pd_industrial_visit.roll_no from pd_industrial_visit union all select pd_inplant_training.credits,pd_inplant_training.roll_no from pd_inplant_training union all select pd_mini_project.credits,pd_mini_project.roll_no from pd_mini_project union all select pd_motivational_talk.credits,pd_motivational_talk.roll_no from pd_motivational_talk union all select pd_placement.credits,pd_placement.roll_no from pd_placement union all select pd_publications.credits,pd_publications.roll_no from pd_publications) as t1 inner join student_details on t1.roll_no = student_details.roll_no where student_details.dept = ? GROUP by student_details.batch;",
+    [params.dept],
+    (err, results, fields) => {
       if (err) {
         console.log(err);
         //   throw err;
@@ -342,9 +344,11 @@ function GenerateCreditsChartCA(callback){
   );
 }
 
-function GenerateCreditsChartHOD(callback){
+function GenerateCreditsChartHOD(callback) {
   connection.query(
-    "SELECT sum(credits) as credits_sum,student_details.batch from (select pd_workshops.credits,pd_workshops.roll_no from pd_workshops union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_courses.credits,pd_courses.roll_no from pd_courses union all select pd_final_project.credits,pd_final_project.roll_no from pd_final_project union all select pd_guest_lecture.credits,pd_guest_lecture.roll_no from pd_guest_lecture union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_industrial_visit.credits,pd_industrial_visit.roll_no from pd_industrial_visit union all select pd_inplant_training.credits,pd_inplant_training.roll_no from pd_inplant_training union all select pd_mini_project.credits,pd_mini_project.roll_no from pd_mini_project union all select pd_motivational_talk.credits,pd_motivational_talk.roll_no from pd_motivational_talk union all select pd_placement.credits,pd_placement.roll_no from pd_placement union all select pd_publications.credits,pd_publications.roll_no from pd_publications) as t1 inner join student_details on t1.roll_no = student_details.roll_no where student_details.dept = ? GROUP by student_details.batch;", [params.dept],(err, results, fields) => {
+    "SELECT sum(credits) as credits_sum,student_details.batch from (select pd_workshops.credits,pd_workshops.roll_no from pd_workshops union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_courses.credits,pd_courses.roll_no from pd_courses union all select pd_final_project.credits,pd_final_project.roll_no from pd_final_project union all select pd_guest_lecture.credits,pd_guest_lecture.roll_no from pd_guest_lecture union all select pd_webinar.credits,pd_webinar.roll_no from pd_webinar union all select pd_industrial_visit.credits,pd_industrial_visit.roll_no from pd_industrial_visit union all select pd_inplant_training.credits,pd_inplant_training.roll_no from pd_inplant_training union all select pd_mini_project.credits,pd_mini_project.roll_no from pd_mini_project union all select pd_motivational_talk.credits,pd_motivational_talk.roll_no from pd_motivational_talk union all select pd_placement.credits,pd_placement.roll_no from pd_placement union all select pd_publications.credits,pd_publications.roll_no from pd_publications) as t1 inner join student_details on t1.roll_no = student_details.roll_no where student_details.dept = ? GROUP by student_details.batch;",
+    [params.dept],
+    (err, results, fields) => {
       if (err) {
         console.log(err);
         //   throw err;
@@ -355,6 +359,29 @@ function GenerateCreditsChartHOD(callback){
     }
   );
 }
+
+// Credits Table
+function credits_dataCA(params, callback) {
+  connection.query(
+    "select count(*) as total,verified,batch from (select pd_workshops.roll_no,pd_workshops.credits,pd_workshops.verified from pd_workshops union all select pd_webinar.roll_no,pd_webinar.credits,pd_webinar.verified from pd_webinar union all select pd_competitions.roll_no,pd_competitions.credits,pd_competitions.verified from pd_competitions UNION all select pd_courses.roll_no,pd_courses.credits,pd_courses.verified from pd_courses UNION ALL SELECT pd_final_project.roll_no,pd_final_project.credits,pd_final_project.verified from pd_final_project) as t1 inner join student_details on student_details.roll_no = t1.roll_no where student_details.dept=? and verified='Verified' group by batch;",
+    [params.dept],
+    (err, results_verified, fields) => {
+      if (err) {
+        console.log(err);
+        return callback(false);
+      } else {
+        connection.query(
+          "select count(*) as total,verified,batch from (select pd_workshops.roll_no,pd_workshops.credits,pd_workshops.verified from pd_workshops union all select pd_webinar.roll_no,pd_webinar.credits,pd_webinar.verified from pd_webinar union all select pd_competitions.roll_no,pd_competitions.credits,pd_competitions.verified from pd_competitions UNION all select pd_courses.roll_no,pd_courses.credits,pd_courses.verified from pd_courses UNION ALL SELECT pd_final_project.roll_no,pd_final_project.credits,pd_final_project.verified from pd_final_project) as t1 inner join student_details on student_details.roll_no = t1.roll_no where student_details.dept=? and verified='Pending' group by batch;",
+          [params.dept],
+          (err, results_pending, fields) => {
+            return callback([results_verified, results_pending]);
+          }
+        );
+      }
+    }
+  );
+}
+
 module.exports = {
   GenerateInternshipChartsOfficial: GenerateInternshipChartsOfficial,
   GeneratePlacementChartsOfficial: GeneratePlacementChartsOfficial,
@@ -366,6 +393,7 @@ module.exports = {
   GenerateAcademicSummaryChartsCA: GenerateAcademicSummaryChartsCA,
   GenerateInternshipChartsCA: GenerateInternshipChartsCA,
   GeneratePlacementChartsCA: GeneratePlacementChartsCA,
-  GenerateCreditsChartCA:GenerateCreditsChartCA,
-  GenerateCreditsChartHOD:GenerateCreditsChartHOD
+  GenerateCreditsChartCA: GenerateCreditsChartCA,
+  GenerateCreditsChartHOD: GenerateCreditsChartHOD,
+  credits_dataCA: credits_dataCA,
 };

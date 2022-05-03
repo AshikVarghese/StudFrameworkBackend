@@ -69,20 +69,19 @@ var cors = require("cors");
 let student_details = require("./models/student_details");
 const charts = require("./models/charts");
 
-const multer  = require('multer')
-var path = require('path')
+const multer = require("multer");
+var path = require("path");
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'models/uploads/')
+    cb(null, "models/uploads/");
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '.' + file.originalname) //Appending .xlsx
-  }
-})
+    cb(null, Date.now() + "." + file.originalname); //Appending .xlsx
+  },
+});
 
-
-const upload = multer({ storage: storage })
+const upload = multer({ storage: storage });
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -1300,15 +1299,14 @@ app.get("/download_template", (req, res) => {
   );
 });
 
-app.get("/download_all/:id",(req,res) => {
-  var file = "./models/template/"+req.params.id;
-  res.download(file,"template.xlsx",
-  (err) => {
+app.get("/download_all/:id", (req, res) => {
+  var file = "./models/template/" + req.params.id;
+  res.download(file, "template.xlsx", (err) => {
     console.log(err);
-  })
-})
+  });
+});
 
-// Admin controls - Create 
+// Admin controls - Create
 app.post("/admin_create_creds", (req, res) => {
   params = req.body;
   admin.insert_login_cred(params, (results) => {
@@ -1320,7 +1318,7 @@ app.post("/admin_create_creds", (req, res) => {
   });
 });
 
-// Admin controls - Delete 
+// Admin controls - Delete
 app.post("/admin_delete_creds", (req, res) => {
   params = req.body;
   admin.remove_cred(params, (results) => {
@@ -1332,7 +1330,7 @@ app.post("/admin_delete_creds", (req, res) => {
   });
 });
 
-// Admin controls - Edit 
+// Admin controls - Edit
 app.post("/admin_edit_creds", (req, res) => {
   params = req.body;
   admin.edit_cred(params, (results) => {
@@ -1357,29 +1355,14 @@ app.post("/admin_get_creds", (req, res) => {
 });
 
 //bulk for pd
-app.post("/bulkforpd", upload.single('file'),(req,res)=>{
+app.post("/bulkforpd", upload.single("file"), (req, res) => {
   var file_present = req.file;
   if (!file_present) {
     res.send("File Not Found (Please Check)");
-  }
-  else{
+  } else {
     var params = req.body;
-    var req = {"path": req.file.path, "type": params.value}
+    var req = { path: req.file.path, type: params.value };
     bkpd.bulkuploadpd(req, (results) => {
-      if (!results) {
-        console.log("error");
-      } else {
-        res.send(results);
-      }
-    })
-  }
-});
-
-//Aptitude edit and delete
-app.post("/aptitude_edit_delete", (req, res) => {
-  params = req.body;
-  if(params.edit == "no"){
-    pd_aptitude.delete_aptitude((results) => {
       if (!results) {
         console.log("error");
       } else {
@@ -1387,16 +1370,28 @@ app.post("/aptitude_edit_delete", (req, res) => {
       }
     });
   }
-  else if(params.edit == "yes"){
+});
+
+//Aptitude edit and delete
+app.post("/aptitude_edit_delete", (req, res) => {
+  params = req.body;
+  if (params.edit == "no") {
+    pd_aptitude.delete_aptitude((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  } else if (params.edit == "yes") {
     pd_aptitude.edit_aptitude((results) => {
       if (!results) {
         console.log("error");
       } else {
         res.send(results);
       }
-    })
-  }
-  else{
+    });
+  } else {
     res.send("Invalid API call");
   }
 });
@@ -1412,7 +1407,7 @@ app.post("/aptitude_cadisplay", (req, res) => {
 //sdiscovery edit and delete
 app.post("/sdiscovery_edit_delete", (req, res) => {
   params = req.body;
-  if(params.edit == "no"){
+  if (params.edit == "no") {
     pd_sdiscovery.delete_sdiscovery((results) => {
       if (!results) {
         console.log("error");
@@ -1420,17 +1415,15 @@ app.post("/sdiscovery_edit_delete", (req, res) => {
         res.send(results);
       }
     });
-  }
-  else if(params.edit == "yes"){
+  } else if (params.edit == "yes") {
     pd_sdiscovery.edit_sdiscovery((results) => {
       if (!results) {
         console.log("error");
       } else {
         res.send(results);
       }
-    })
-  }
-  else{
+    });
+  } else {
     res.send("Invalid API call");
   }
 });
@@ -1440,6 +1433,32 @@ app.post("/sdiscovery_cadisplay", (req, res) => {
   params = req.body;
   pd_sdiscovery.get_sdiscovery((results) => {
     res.send(JSON.stringify(results));
+  });
+});
+
+//credits
+app.post("/getcreditsCA", (req, res) => {
+  params = req.body;
+  charts.credits_dataCA(params, (results) => {
+    let json_lst = [];
+
+    for (let i = 0; i < results[0].length; i++) {
+      let json = new Object();
+      json.batch = results[0][i].batch;
+      json.verified = results[0][i].total;
+      json.pending = 0;
+      json_lst.push(json);
+    }
+
+    for (let inx = 0; inx < results[1].length; inx++) {
+      for (let inx1 = 0; inx1 < json_lst.length; inx1++) {
+        if (json_lst[inx1].batch == results[1][inx].batch) {
+          json_lst[inx1].pending = results[1][inx].total;
+        }
+      }
+    }
+
+    res.send(JSON.stringify(json_lst));
   });
 });
 
