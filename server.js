@@ -1462,6 +1462,31 @@ app.post("/getcreditsCA", (req, res) => {
   });
 });
 
+app.post("/getcreditsOfficials", (req, res) => {
+  params = req.body;
+  charts.credits_data_Officials(params, (results) => {
+    let json_lst = [];
+
+    for (let i = 0; i < results[0].length; i++) {
+      let json = new Object();
+      json.dept = results[0][i].dept;
+      json.verified = results[0][i].total;
+      json.pending = 0;
+      json_lst.push(json);
+    }
+
+    for (let inx = 0; inx < results[1].length; inx++) {
+      for (let inx1 = 0; inx1 < json_lst.length; inx1++) {
+        if (json_lst[inx1].dept == results[1][inx].dept) {
+          json_lst[inx1].pending = results[1][inx].total;
+        }
+      }
+    }
+
+    res.send(JSON.stringify(json_lst));
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 // const server = app.listen(PORT,() =>

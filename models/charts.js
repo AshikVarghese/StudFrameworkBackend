@@ -382,6 +382,28 @@ function credits_dataCA(params, callback) {
   );
 }
 
+// Credits Table Officials
+function credits_data_Officials(params, callback) {
+  connection.query(
+    "select count(*) as total,dept from (select pd_workshops.roll_no,pd_workshops.credits,pd_workshops.verified from pd_workshops union all select pd_webinar.roll_no,pd_webinar.credits,pd_webinar.verified from pd_webinar union all select pd_competitions.roll_no,pd_competitions.credits,pd_competitions.verified from pd_competitions UNION all select pd_courses.roll_no,pd_courses.credits,pd_courses.verified from pd_courses UNION ALL SELECT pd_final_project.roll_no,pd_final_project.credits,pd_final_project.verified from pd_final_project) as t1 inner join student_details on student_details.roll_no = t1.roll_no where verified='Verified' group by dept",
+    [params.dept],
+    (err, results_verified, fields) => {
+      if (err) {
+        console.log(err);
+        return callback(false);
+      } else {
+        connection.query(
+          "select count(*) as total,dept from (select pd_workshops.roll_no,pd_workshops.credits,pd_workshops.verified from pd_workshops union all select pd_webinar.roll_no,pd_webinar.credits,pd_webinar.verified from pd_webinar union all select pd_competitions.roll_no,pd_competitions.credits,pd_competitions.verified from pd_competitions UNION all select pd_courses.roll_no,pd_courses.credits,pd_courses.verified from pd_courses UNION ALL SELECT pd_final_project.roll_no,pd_final_project.credits,pd_final_project.verified from pd_final_project) as t1 inner join student_details on student_details.roll_no = t1.roll_no where verified='Pending' group by dept",
+          [params.dept],
+          (err, results_pending, fields) => {
+            return callback([results_verified, results_pending]);
+          }
+        );
+      }
+    }
+  );
+}
+
 module.exports = {
   GenerateInternshipChartsOfficial: GenerateInternshipChartsOfficial,
   GeneratePlacementChartsOfficial: GeneratePlacementChartsOfficial,
@@ -396,4 +418,5 @@ module.exports = {
   GenerateCreditsChartCA: GenerateCreditsChartCA,
   GenerateCreditsChartHOD: GenerateCreditsChartHOD,
   credits_dataCA: credits_dataCA,
+  credits_data_Officials: credits_data_Officials,
 };
