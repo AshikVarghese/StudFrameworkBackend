@@ -85,10 +85,11 @@ function fetch_academic_details_official(callback) {
 function fetch_academic_details_hod(params, callback) {
   // console.log(params);
   connection.query(
-    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no where student_details.dept=?",
+    "SELECT distinct(academics.roll_no),sname,reg_no,batch,licet_email from academics inner join student_details on academics.roll_no=student_details.roll_no where student_details.dept=?",
     [params.department],
     (err, results, fields) => {
       if (err) {
+        console.log(err);
         return callback(false);
       }
       return callback(results);
@@ -152,6 +153,8 @@ function fetch_academic_values(params, callback) {
       if (err) {
         return callback(false);
       } else {
+        console.log("helo");
+        console.log(params.StudentDetails);
         console.log(results);
         return callback(results);
       }
@@ -174,6 +177,21 @@ function fetch_academic_summary_record(params, callback) {
   );
 }
 
+function get_credits_student(params, callback) {
+  connection.query(
+    "SELECT sum(credits) as total from (SELECT credits,roll_no from pd_workshops union all SELECT credits,roll_no from pd_webinar union all SELECT credits,roll_no from pd_aptitude UNION ALL SELECT credits,roll_no from pd_competitions UNION all SELECT credits,roll_no from pd_courses UNION ALL SELECT credits,roll_no from pd_employability_skill UNION all SELECT credits,roll_no from pd_final_project UNION ALL SELECT credits,roll_no from pd_final_project UNION ALL SELECT credits,roll_no from pd_guest_lecture UNION all SELECT credits,roll_no from pd_inplant_training UNION ALL SELECT credits,roll_no from pd_internship UNION all SELECT credits,roll_no from pd_mini_project UNION ALL SELECT credits,roll_no from pd_motivational_talk UNION all SELECT credits,roll_no from pd_other_projects UNION all SELECT credits,roll_no from pd_publications UNION ALL SELECT credits,roll_no from pd_skillrack UNION ALL SELECT credits,roll_no from pd_soft_skill UNION ALL SELECT credits,roll_no from pd_system_discovery) as t1  where t1.roll_no = ? GROUP BY t1.roll_no",
+    [params.StudentDetails],
+    (err, results, fields) => {
+      if (err) {
+        console.log(err);
+        return callback(err);
+      } else {
+        return callback(results);
+      }
+    }
+  );
+}
+
 module.exports = {
   insert_academic_details: insert_academic_details,
   fetch_academic_details_official: fetch_academic_details_official,
@@ -184,4 +202,5 @@ module.exports = {
   fetch_academic_columns: fetch_academic_columns,
   fetch_academic_values: fetch_academic_values,
   fetch_academic_summary_record: fetch_academic_summary_record,
+  get_credits_student: get_credits_student,
 };

@@ -207,7 +207,6 @@ app.post("/Academic", (req, res) => {
 app.post("/AcademicsData", (req, res) => {
   params = req.body;
   academic_details.fetch_academic_values(params, (results) => {
-    // console.log(params);
     res.send(JSON.stringify(results));
   });
 });
@@ -221,7 +220,6 @@ app.post("/AcademicsDataofficial", (req, res) => {
 app.post("/AcademicsDataHOD", (req, res) => {
   let params = req.body;
   academic_details.fetch_academic_details_hod(params, (results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1484,6 +1482,15 @@ app.post("/getcreditsOfficials", (req, res) => {
     }
 
     res.send(JSON.stringify(json_lst));
+  });
+});
+
+app.post("/get_credits_student", (req, res) => {
+  let params = req.body;
+  // console.log(params);
+  academic_details.get_credits_student(params, (results) => {
+    // console.log(results);
+    res.send(JSON.stringify(results));
   });
 });
 
