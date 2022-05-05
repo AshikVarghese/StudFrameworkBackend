@@ -97,13 +97,12 @@ function PdIndustry_edit(callback) {
 
 function PdIndustry_Stud_insert(callback) {
   connection.query(
-    "INSERT INTO pd_industrial_visit(roll_no,industry_name,date,outcome,verified) VALUES(?,?,?,?,?)",
+    "INSERT INTO pd_industrial_visit(roll_no,industry_name,date,outcome) VALUES(?,?,?,?)",
     [
       params.StudentDetails,
       params.Industry,
       params.DateYear,
       params.Outcome,
-      params.status,
     ],
     (err, results, fields) => {
       if (err) {
