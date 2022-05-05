@@ -58,7 +58,7 @@ const pd_webinars = require("./models/pd_webinars");
 const pd_workshops = require("./models/pd_workshops");
 const pd_aptitude = require("./models/pd_aptitude");
 const pd_sdiscovery = require("./models/pd_sdiscovery");
-const pd_sskills = require("./models/pd_softskill")
+const pd_sskills = require("./models/pd_softskill");
 const pd_empskills = require("./models/pd_employability_skill");
 
 const bkpd = require("./models/bulkuploadpd");
@@ -1420,7 +1420,7 @@ app.post("/sskills_cadisplay", (req, res) => {
   pd_sskills.get_soft_skill((results) => {
     res.send(JSON.stringify(results));
   });
-})
+});
 
 //empskills ca display
 app.post("/empskills_cadisplay", (req, res) => {
@@ -1428,7 +1428,7 @@ app.post("/empskills_cadisplay", (req, res) => {
   pd_empskills.get_employability_skill((results) => {
     res.send(JSON.stringify(results));
   });
-})
+});
 
 //sdiscovery edit and delete
 app.post("/sdiscovery_edit_delete", (req, res) => {
@@ -1537,6 +1537,13 @@ app.post("/file_upload_admin", upload1.single("file"), (req, res) => {
       }
     });
   }
+});
+
+app.post("/sskils_stud_display", (req, res) => {
+  params = req.body;
+  pd_sskills.sskill_Stud_display((results) => {
+    res.send(JSON.stringify(results));
+  });
 });
 
 const PORT = process.env.PORT || 5000;
