@@ -1546,6 +1546,30 @@ app.post("/sskils_stud_display", (req, res) => {
   });
 });
 
+//sskills edit and delete
+app.post("/skills_edit_delete", (req, res) => {
+  params = req.body;
+  if (params.edit == "no") {
+    pd_sskills.delete_soft_skill((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  } else if (params.edit == "yes") {
+    pd_sskills.edit_soft_skill((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  } else {
+    res.send("Invalid API call");
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 
 // const server = app.listen(PORT,() =>

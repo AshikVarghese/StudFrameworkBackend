@@ -97,13 +97,12 @@ function PdGuest_edit(callback) {
 
 function PdGuest_Stud_insert(callback) {
   connection.query(
-    "INSERT INTO pd_guest_lecture(roll_no,topic,resource_person,outcome,verified) VALUES(?,?,?,?,?)",
+    "INSERT INTO pd_guest_lecture(roll_no,topic,resource_person,outcome) VALUES(?,?,?,?)",
     [
       params.StudentDetails,
       params.Topic,
       params.Resource,
       params.Outcome,
-      params.status,
     ],
     (err, results, fields) => {
       if (err) {

@@ -32,9 +32,10 @@ function get_soft_skill(callback) {
 
 function edit_soft_skill(callback) {
   connection.query(
-    "UPDATE `pd_soft_skill` SET trainer = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
+    "UPDATE `pd_soft_skill` SET skill=?, trainer = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
     [
-      params.assessment,
+      params.skill,
+      params.trainer,
       params.date,
       params.remarks,
       params.credits,
