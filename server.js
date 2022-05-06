@@ -1570,6 +1570,30 @@ app.post("/skills_edit_delete", (req, res) => {
   }
 });
 
+//sskills edit and delete
+app.post("/eskills_edit_delete", (req, res) => {
+  params = req.body;
+  if (params.edit == "no") {
+    pd_empskills.delete_employability_skill((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  } else if (params.edit == "yes") {
+    pd_empskills.edit_employability_skill((results) => {
+      if (!results) {
+        console.log("error");
+      } else {
+        res.send(results);
+      }
+    });
+  } else {
+    res.send("Invalid API call");
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 
 // const server = app.listen(PORT,() =>

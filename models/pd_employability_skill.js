@@ -14,10 +14,11 @@ function get_employability_skill(callback) {
   );
 }
 
-function edit_employability_skill(params) {
-  connection.query("UPDATE `pd_employability_skill` SET trainer = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
+function edit_employability_skill(callback) {
+  connection.query("UPDATE `pd_employability_skill` SET tech_skill=?, trainer = ?, date = ?, remarks = ?, credits = ? WHERE (s_no = ?)",
   [
-    params.assessment,
+    params.techskill,
+    params.trainer,
     params.date,
     params.remarks,
     params.credits,
