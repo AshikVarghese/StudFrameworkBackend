@@ -44,14 +44,14 @@ function ExtraOutreach_CA_display(callback) {
 
 function ExtraOutreach_verify(callback) {
   connection.query(
-    "UPDATE `ec_outreach` SET outreach_verified=? WHERE (s_no = ?)",
+    "UPDATE `ec_outreach` SET verified=? WHERE (s_no = ?)",
     [params.verify, params.columnid],
     (err, results, fields) => {
       if (err) {
         console.log(err);
-        return callback(false);
+        return callback("Verification failed");
       } else {
-        return callback(results);
+        return callback("Verified Successfully");
       }
     }
   );
@@ -64,9 +64,9 @@ function ExtraOutreach_delete(callback) {
     (err, results, fields) => {
       if (err) {
         console.log(err);
-        return callback(false);
+        return callback("Delete failed");
       } else {
-        return callback(results);
+        return callback("Deleted Successfully");
       }
     }
   );
@@ -74,7 +74,7 @@ function ExtraOutreach_delete(callback) {
 
 function ExtraOutreach_edit(callback) {
   connection.query(
-    "UPDATE `ec_outreach` SET outreach_activity_name = ?,outreach_date = ?,outreach_outcome=?, credits=? WHERE (s_no = ?)",
+    "UPDATE `ec_outreach` SET activity_name = ?,date = ?,outcome=?, credits=? WHERE (s_no = ?)",
     [
       params.outreachname,
       params.date,
@@ -85,9 +85,9 @@ function ExtraOutreach_edit(callback) {
     (err, results, fields) => {
       if (err) {
         console.log(err);
-        return callback(false);
+        return callback("Edit failed");
       } else {
-        return callback(results);
+        return callback("Edited Successfully");
       }
     }
   );
