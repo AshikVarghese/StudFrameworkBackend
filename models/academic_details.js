@@ -73,7 +73,8 @@ function fetch_academic_columns(callback) {
 
 function fetch_academic_details_official(callback) {
   connection.query(
-    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no ",
+    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no and student_details.dept=?",
+    [params.department],
     (err, results, fields) => {
       if (err) {
         return callback(false);
