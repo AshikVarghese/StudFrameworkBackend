@@ -98,7 +98,7 @@ function fetch_academic_details_hod(params, callback) {
 }
 function fetch_academic_details_classadvisor(params, callback) {
   connection.query(
-    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no where student_details.batch=?",
+    "SELECT distinct(academics.roll_no),student_details.sname,student_details.reg_no,student_details.batch,student_details.licet_email from academics inner join student_details on academics.roll_no=student_details.roll_no where student_details.batch=? ORDER BY student_details.sname asc",
     [params.batch],
     (err, results, fields) => {
       if (err) {
