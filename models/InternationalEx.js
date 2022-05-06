@@ -77,15 +77,16 @@ function InternationalEx_Stud_display_student(callback) {
 
 function InternationalEx_Stud_insert(callback) {
   connection.query(
-    "INSERT INTO international_exposure(roll_no,foreign_campus,duration,project,outcome,personal_development,foreign_language_courses,verify,credits) VALUES(?,?,?,?,?,?,?,?,0)",
+    "INSERT INTO international_exposure(roll_no,foreign_campus,date,duration,project,outcome,personal_development,foreign_language_courses,verify,credits) VALUES(?,?,?,?,?,?,?,?,?,0)",
     [
       params.StudentDetails,
       params.Campus,
       params.DateYear,
+      params.Duration,
       params.Project,
       params.Outcome,
       params.PersD,
-      params.ForLCC || 0,
+      params.ForLCC,
       params.status,
     ],
     (err, results, fields) => {
