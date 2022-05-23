@@ -234,6 +234,20 @@ app.post("/InternationalExpoofficial", (req, res) => {
   });
 });
 
+app.post("/InternationalExpoofficialDepartment", (req, res) => {
+  params = req.body;
+  InternationalEx_Stud_official.InternationalEx_Stud_official((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+
+app.post("/InternationalExpoofficialBatch", (req, res) => {
+  params = req.body;
+  InternationalEx_Stud_official.InternationalEx_Stud_official((results) => {
+    res.send(JSON.stringify(results));
+  });
+});
+
 app.post("/InternationalExposureDelete", (req, res) => {
   params = req.body;
   InternationalEx_Stud_delete.InternationalEx_Stud_delete((results) => {
@@ -1328,6 +1342,9 @@ app.post("/admin_get_creds", (req, res) => {
     }
   });
 });
+
+// bulk upload for professional development
+
 
 const PORT = process.env.PORT || 5000;
 
