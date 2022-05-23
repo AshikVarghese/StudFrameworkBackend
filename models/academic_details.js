@@ -73,7 +73,7 @@ function fetch_academic_columns(callback) {
 
 function fetch_academic_details_official(callback) {
   connection.query(
-    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no ",
+    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no",
     (err, results, fields) => {
       if (err) {
         return callback(false);
@@ -97,8 +97,8 @@ function fetch_academic_details_hod(params, callback) {
 }
 function fetch_academic_details_classadvisor(params, callback) {
   connection.query(
-    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no where student_details.batch=?",
-    [params.batch],
+    "SELECT * from academics inner join student_details on academics.roll_no=student_details.roll_no where student_details.batch=? and student_details.dept=?",
+    [params.batch,params.department],
     (err, results, fields) => {
       if (err) {
         return callback(false);
