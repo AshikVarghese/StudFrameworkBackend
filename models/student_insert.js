@@ -106,6 +106,16 @@ function student_insert(params, callback) {
         console.log(params_lst.length);
         throw err;
       } else {
+        connection.query("INSERT INTO student.login_details values (?,?,?,?,?,?,?) ",
+        [
+          params.offemail,
+          '581387ae7ae67b05b79d63cb158e78c781d70c11a22db231b22ffa4726b48754d2a2679d02dae980c4b72f5da50b983224ceb8a040bc2fe812d509a0cf9ecd9f',
+          '',
+          params.rollno,
+          params.department,
+          params.batch,
+          0
+        ])
         console.log("Inserted");
       }
     }
