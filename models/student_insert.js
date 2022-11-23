@@ -107,7 +107,7 @@ function student_insert(params, callback) {
         console.log(params_lst.length);
         throw err;
       } else {
-        connection.query("INSERT INTO student.login_details(email,password,auth_token,roll_no,dept,batch,user_type) values (?,?,?,?,?,?,?)",[params.offemail,generate_password_hashed("licet123"),generate_auth_key(),params.rollno,params.department,params.batch,0],(err,results,fields)=>{
+        connection.query("UPDATE student.login_details roll_no = ? where email=?",[params.rollno ,params.offemail],(err,results,fields)=>{
           if(err){
             // throw err;
             console.log(err);
