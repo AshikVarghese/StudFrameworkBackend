@@ -1140,7 +1140,7 @@ app.post("/Industrialv_edit", (req, res) => {
 app.post("/Industrialv_insert", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
