@@ -160,7 +160,7 @@ app.post("/studentinsert", (req, res) => {
     if (!results) {
       console.log("error");
     } else {
-      res.send(results);
+      res.status(results.code).send(results.message);
     }
   });
 });
