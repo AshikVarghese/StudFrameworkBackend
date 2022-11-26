@@ -320,7 +320,7 @@ app.post("/InternationalExposureStudent", (req, res) => {
 app.post("/insertstudinter", (req, res) => {
   params = req.body;
   InternationalEx_Stud_insert.InternationalEx_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);
   });
 });
 
