@@ -361,28 +361,28 @@ app.post("/ExtraCulturalCADisplay", (req, res) => {
 app.post("/insertstudextraclub", (req, res) => {
   params = req.body;
   ExtraClub_Stud_insert.ExtraClub_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);
   });
 });
 
 app.post("/insertstudextraoutreach", (req, res) => {
   params = req.body;
   ExtraOutreach_Stud_insert.ExtraOutreach_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);
   });
 });
 
 app.post("/insertstudextrasports", (req, res) => {
   params = req.body;
   insert_ec_sports_achv.insert_ec_sports_achv((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);
   });
 });
 
 app.post("/insertstudextracultural", (req, res) => {
   params = req.body;
   insert_ec_culturals_activity.insert_ec_culturals_activity((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);
   });
 });
 

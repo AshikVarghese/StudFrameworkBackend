@@ -95,7 +95,7 @@ function ExtraOutreach_edit(callback) {
 
 function ExtraOutreach_Stud_insert(callback) {
   connection.query(
-    "INSERT INTO ec_outreach(roll_no,outreach_activity_name,outreach_date,outreach_outcome,outreach_verified) VALUES(?,?,?,?,?)",
+    "INSERT INTO ec_outreach(roll_no,activity_name,date,outcome,verified) VALUES(?,?,?,?,?)",
     [
       params.StudentDetails,
       params.outreachname,
@@ -105,10 +105,9 @@ function ExtraOutreach_Stud_insert(callback) {
     ],
     (err, results, fields) => {
       if (err) {
-        console.log(err);
-        return callback("NotInserted");
+        return callback({message : "Server Down", code : 500});
       } else {
-        return callback("Inserted");
+        return callback({message : "Success", code : 200});
       }
     }
   );
