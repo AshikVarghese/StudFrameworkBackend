@@ -107,7 +107,7 @@ function student_insert(params, callback) {
         console.log(params_lst.length);
         throw err;
       } else {
-        connection.query("UPDATE student.login_details roll_no = ? where email=?",[params.rollno ,params.offemail],(err,results,fields)=>{
+        connection.query("UPDATE student.login_details set roll_no = ? where email=?",[params.rollno ,params.offemail],(err,results,fields)=>{
           if(err){
             // throw err;
             console.log(err);

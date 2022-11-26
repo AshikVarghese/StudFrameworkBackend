@@ -37,7 +37,6 @@ function remove_cred(params, callback) {
         [email],
         (err, results, fields) => {
           if (err) {
-            console.log(err);
             return callback("server-down");
           } else {
             return callback("removed");

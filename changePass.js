@@ -19,7 +19,6 @@ function change_pass(params, callback) {
             .createHash("sha256")
             .update(params.new_pass)
             .digest("hex");
-          console.log(old_pass === details[0].password);
           if (old_pass === details[0].password) {
             connection.query(
               'UPDATE  `student`.`login_details` SET `password` = "' +

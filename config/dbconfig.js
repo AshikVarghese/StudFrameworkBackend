@@ -10,21 +10,6 @@ var connection = mysql.createConnection({
   database: "student",
 });
 
-// var connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "",
-//   database: "student",
-// });
-
-// Production Connection
-// var connection = mysql.createConnection({
-//   host: "localhost",
-//   user: "root",
-//   password: "password",
-//   database: "student",
-// });
-
 connection.connect((err) => {
   if (err) throw err;
   else {

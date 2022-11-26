@@ -156,7 +156,6 @@ app.post("/passchange", (req, res) => {
 
 app.post("/studentinsert", (req, res) => {
   params = req.body;
-  // console.log(params);
   student_insert.student_insert(params, (results) => {
     if (!results) {
       console.log("error");
@@ -211,7 +210,6 @@ app.post("/GeneralOfficialBatch", (req, res) => {
 app.post("/Academic", (req, res) => {
   params = req.body;
   academic_details.fetch_academic_details_classadvisor(params, (results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -224,7 +222,6 @@ app.post("/AcademicsData", (req, res) => {
 });
 app.post("/AcademicsDataofficial", (req, res) => {
   academic_details.fetch_academic_details_official((results) => {
-    //console.log(results)
     res.send(JSON.stringify(results));
   });
 });
@@ -399,7 +396,6 @@ app.post("/ExtraOutreachStudentDisplay", (req, res) => {
 app.post("/ExtraSportsStudentDisplay", (req, res) => {
   params = req.body;
   fetch_ec_sports_achv_student.fetch_ec_sports_achv_student((results) => {
-    // console.log(params);
     res.send(JSON.stringify(results));
   });
 });
@@ -1108,14 +1104,12 @@ app.post("/Inplant_insert", (req, res) => {
 app.post("/Industrialv_display", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_Stud_display((results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
 app.post("/Industrialv_cadisplay", (req, res) => {
   params = req.body;
   pd_industrial_visit.PdIndustry_CA_display((results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1172,7 +1166,6 @@ app.post("/ProfessionalDevelopmentHOD", (req, res) => {
 app.post("/InternshipGraphHOD", (req, res) => {
   params = req.body;
   charts.GenerateInternshipChartsHOD(params, (results) => {
-    // console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
     });
@@ -1188,14 +1181,12 @@ app.post("/PlacementGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GeneratePlacementChartsHOD(params, (results) => {
-    // console.log(results);
     let placement_lst = results.map((item) => {
       return item.placement_count;
     });
     let batches = results.map((item) => {
       return item.batch;
     });
-    // console.log(results);
     res.send(
       JSON.stringify({ placement_lst: placement_lst, batches: batches })
     );
@@ -1206,7 +1197,6 @@ app.post("/AcademicsGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GenerateAcademicsChartsHOD(params, (results) => {
-    //console.log(results);
     res.send(JSON.stringify({ results }));
   });
 });
@@ -1215,7 +1205,6 @@ app.post("/AcademicSummaryGraphHOD", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GenerateAcademicSummaryChartsHOD(params, (results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1224,7 +1213,6 @@ app.post("/AcademicSummaryGraphHOD", (req, res) => {
 app.post("/InternshipGraphCA", (req, res) => {
   params = req.body;
   charts.GenerateInternshipChartsCA(params, (results) => {
-    // console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
     });
@@ -1240,14 +1228,12 @@ app.post("/PlacementGraphCA", (req, res) => {
   params = req.body;
   params.dept = params.dept.toUpperCase();
   charts.GeneratePlacementChartsCA(params, (results) => {
-    // console.log(results);
     let placement_lst = results.map((item) => {
       return item.placement_count;
     });
     let batches = results.map((item) => {
       return item.batch;
     });
-    // console.log(results);
     res.send(
       JSON.stringify({ placement_lst: placement_lst, batches: batches })
     );
@@ -1273,7 +1259,6 @@ app.post("/AcademicSummaryGraphHOD", (req, res) => {
 /* -------------- Official GRAPHS -----------------------*/
 app.post("/InternshipGraphOfficial", (req, res) => {
   charts.GenerateInternshipChartsOfficial((results) => {
-    // console.log(results);
     let intern_lst = results.map((item) => {
       return item.intern_count;
     });
@@ -1515,9 +1500,7 @@ app.post("/getcreditsOfficials", (req, res) => {
 
 app.post("/get_credits_student", (req, res) => {
   let params = req.body;
-  // console.log(params);
   academic_details.get_credits_student(params, (results) => {
-    // console.log(results);
     res.send(JSON.stringify(results));
   });
 });
@@ -1527,7 +1510,6 @@ app.post("/file_upload_admin", upload1.single("file"), (req, res) => {
   if (!file_present) {
     res.send("File Not Found (Please Check)");
   } else {
-    // var params = req.body;
     var req = { path: req.file.path };
     bkpd.bulkadmin(req, (results) => {
       if (!results) {
@@ -1594,12 +1576,7 @@ app.post("/eskills_edit_delete", (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 5000;
-
-// const server = app.listen(PORT,() =>
-//   console.log(`Server running in port :"${PORT}"`)
-// );
-// http://192.168.1.145:80
+const PORT = process.env.PORT || 8080;
 
 http.listen(PORT, () => {
   console.log(`Server running in port :"${PORT}"`);

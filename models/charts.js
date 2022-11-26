@@ -43,7 +43,6 @@ function GeneratePlacementChartsHOD(params, callback) {
           console.log(err);
           //   throw err;
         } else {
-          // console.log(results);
           return callback(results);
         }
       }
@@ -189,7 +188,6 @@ function GeneratePlacementChartsCA(params, callback) {
         console.log(err);
         //   throw err;
       } else {
-        // console.log(results);
         return callback(results);
       }
     }
@@ -322,7 +320,6 @@ function GeneratePlacementChartsOfficial(callback) {
         console.log(err);
         //   throw err;
       } else {
-        // console.log(results);
         return callback(results);
       }
     }
@@ -337,7 +334,6 @@ function GenerateCreditsChartCA(callback) {
         console.log(err);
         //   throw err;
       } else {
-        // console.log(results);
         return callback(results);
       }
     }
@@ -353,7 +349,6 @@ function GenerateCreditsChartHOD(callback) {
         console.log(err);
         //   throw err;
       } else {
-        // console.log(results);
         return callback(results);
       }
     }

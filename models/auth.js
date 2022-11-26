@@ -8,7 +8,6 @@ connection.query(
     "' ;",
   function (err, results, fields) {
     console.log(results[0]); // results contains rows returned by server
-    // console.log(fields[0].name); // fields contains extra meta data about results, if available
   }
 );
 

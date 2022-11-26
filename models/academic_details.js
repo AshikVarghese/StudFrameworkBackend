@@ -18,12 +18,10 @@ function insert_academic_details(params, callback) {
       }
       let keys = Object.keys(params);
       var prev_columns = results.map((col) => col.COLUMN_NAME);
-      // console.log(prev_columns);
-      // console.log(keys);
+
       var columns = keys.filter(function (obj) {
         return prev_columns.indexOf(obj) == -1;
       });
-      // console.log(columns);
       for (var i = 0; i < columns.length; i++) {
         connection.query(
           "ALTER TABLE academics add column " + columns[i] + " varchar(100)",
@@ -65,7 +63,6 @@ function fetch_academic_columns(callback) {
       if (err) {
         console.log(err);
       }
-      console.log(results);
       return callback(results);
     }
   );
@@ -83,7 +80,6 @@ function fetch_academic_details_official(callback) {
   );
 }
 function fetch_academic_details_hod(params, callback) {
-  // console.log(params);
   connection.query(
     "SELECT distinct(academics.roll_no),sname,reg_no,batch,licet_email from academics inner join student_details on academics.roll_no=student_details.roll_no where student_details.dept=?",
     [params.department],
@@ -153,9 +149,6 @@ function fetch_academic_values(params, callback) {
       if (err) {
         return callback(false);
       } else {
-        console.log("helo");
-        console.log(params.StudentDetails);
-        console.log(results);
         return callback(results);
       }
     }
@@ -170,7 +163,6 @@ function fetch_academic_summary_record(params, callback) {
       if (err) {
         return callback(false);
       } else {
-        // console.log(results);
         return callback(results);
       }
     }

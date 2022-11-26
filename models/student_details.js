@@ -10,7 +10,6 @@ function fetch_student_details(params, callback) {
     [params.RollNumber],
     (err, results, fields) => {
       if (err) {
-        console.log(err);
         return callback(false);
       }
       return callback(results);
@@ -40,10 +39,8 @@ function fetch_students_details_pd(params, callback) {
       [params.dept, params.batch],
       (err, results, fields) => {
         if (err) {
-          console.log(err);
           return callback(false);
         }
-        console.log(results.length);
         return callback(results);
       }
     );
@@ -53,10 +50,8 @@ function fetch_students_details_pd(params, callback) {
       [params.dept],
       (err, results, fields) => {
         if (err) {
-          console.log(err);
           return callback(false);
         }
-        console.log(results.length);
         return callback(results);
       }
     );

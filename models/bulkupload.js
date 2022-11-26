@@ -21,7 +21,6 @@ module.exports = function (app) {
   // Upload Courses
   app.post("/bulkupload", upload.single("excel"), (req, res) => {
     importExcelData2MySQLCourses(__dirname + "/uploads/" + req.file.filename);
-    // console.log("uploaded");
     res.send(
       JSON.stringify(
         "http://192.168.1.145:44297/public/Template/academic_details.xlsx#/admin/Academics"
@@ -37,8 +36,6 @@ module.exports = function (app) {
         for (var j = 0; j < rows[i].length; j++) {
           current_marks_record[rows[0][j]] = rows[i][j];
         }
-        console.log(current_marks_record);
-        // console.log(course_details);
         academic_details.insert_academic_details(
           current_marks_record,
           (results) => console.log(results)
