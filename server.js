@@ -569,7 +569,7 @@ app.post("/getColumnName", (req, res) => {
 app.post("/intern_insert", (req, res) => {
   params = req.body;
   pd_internship.PdIntern_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 
@@ -654,7 +654,7 @@ app.post("/comp_edit", (req, res) => {
 app.post("/comp_Stud_insert", (req, res) => {
   params = req.body;
   pd_competitions.PdComp_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
@@ -680,7 +680,7 @@ app.post("/courpd_stud_display", (req, res) => {
 app.post("/Cour_Stud_insert", (req, res) => {
   params = req.body;
   pd_courses.PdCour_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 app.post("/cour_verify", (req, res) => {
@@ -743,7 +743,7 @@ app.post("/finpro_edit", (req, res) => {
 app.post("/final_stud_insert", (req, res) => {
   params = req.body;
   pd_final_project.PdFinal_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
@@ -787,7 +787,7 @@ app.post("/guest_edit", (req, res) => {
 app.post("/guest_stud_insert", (req, res) => {
   params = req.body;
   pd_guest_lecture.PdGuest_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
@@ -831,7 +831,7 @@ app.post("/workshop_edit", (req, res) => {
 app.post("/workshop_stuinsert", (req, res) => {
   params = req.body;
   pd_workshops.PdWork_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
@@ -875,7 +875,7 @@ app.post("/webinar_edit", (req, res) => {
 app.post("/webinar_insert", (req, res) => {
   params = req.body;
   pd_webinars.PdWeb_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
@@ -919,7 +919,7 @@ app.post("/publication_edit", (req, res) => {
 app.post("/publication_insert", (req, res) => {
   params = req.body;
   pd_publications.PdPublica_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
@@ -1007,7 +1007,7 @@ app.post("/Motivational_edit", (req, res) => {
 app.post("/Motivational_insert", (req, res) => {
   params = req.body;
   pd_motivational_talk.PdMotive_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+    res.status(results.code).send(results.message);  
   });
 });
 /* --------------------------------------------------------- */
@@ -1050,8 +1050,8 @@ app.post("/Miniproj_edit", (req, res) => {
 });
 app.post("/Miniproj_insert", (req, res) => {
   params = req.body;
-  pd_mini_project.PdMini_Stud_insert((results) => {
-    res.send(JSON.stringify(results));
+  pd_mini_project.PdMini_Stud_insert(params, (results) => {
+    res.status(results.code).send(results.message);  
   });
 });
 

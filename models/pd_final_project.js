@@ -97,7 +97,7 @@ function PdFinal_edit(callback) {
 
 function PdFinal_Stud_insert(callback) {
   connection.query(
-    "INSERT INTO pd_final_project(roll_no,title,objective,outcome,verified) VALUES(?,?,?,?,?)",
+    "INSERT INTO pd_final_project(roll_no,project_title,objective,outcome,verified) VALUES(?,?,?,?,?)",
     [
       params.StudentDetails,
       params.Title,
@@ -107,10 +107,9 @@ function PdFinal_Stud_insert(callback) {
     ],
     (err, results, fields) => {
       if (err) {
-        console.log(err);
-        return callback("Not Inserted");
+        return callback({message : "Server Down", code : 500});
       } else {
-        return callback("Inserted");
+        return callback({message : "Success", code : 200});
       }
     }
   );

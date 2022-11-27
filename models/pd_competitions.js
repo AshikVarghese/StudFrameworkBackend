@@ -102,18 +102,17 @@ function PdComp_Stud_insert(callback) {
     "INSERT INTO pd_competitions(roll_no,comp_name,comp_type,date,position_secured,verified) VALUES(?,?,?,?,?,?)",
     [
       params.StudentDetails,
-      params.comp_name,
-      params.comp_type,
-      params.date,
-      params.position_secured,
-      params.verified,
+      params.Name,
+      params.Competition,
+      params.DateYear,
+      params.Position,
+      params.status,
     ],
     (err, results, fields) => {
       if (err) {
-        console.log(err);
-        return callback("Not Inserted");
+        return callback({message : "Server Down", code : 500});
       } else {
-        return callback("Inserted");
+        return callback({message : "Success", code : 200});
       }
     }
   );

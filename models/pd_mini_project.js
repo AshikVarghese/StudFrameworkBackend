@@ -95,16 +95,15 @@ function PdMini_edit(callback) {
   );
 }
 
-function PdMini_Stud_insert(callback) {
+function PdMini_Stud_insert(params, callback) {
   connection.query(
-    "INSERT INTO pd_mini_project(roll_no,project_title,objective,outcome,verified) VALUES(?,?,?,?)",
-    [params.StudentDetails, params.Title, params.Objective, params.Outcome],
+    "INSERT INTO pd_mini_project(roll_no,project_title,objective,outcome,verified) VALUES(?,?,?,?,?)",
+    [params.StudentDetails, params.Title, params.Objective, params.Outcome, params.status,],
     (err, results, fields) => {
       if (err) {
-        console.log(err);
-        return callback("Not Inserted");
+        return callback({message : "Server Down", code : 500});
       } else {
-        return callback("Inserted");
+        return callback({message : "Success", code : 200});
       }
     }
   );
